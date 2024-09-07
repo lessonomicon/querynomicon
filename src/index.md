@@ -32,5 +32,5 @@
 
 If you would like to help get this tutorial to a usable state,
 please see
-<a href="https://github.com/gvwilson/sql-tutorial/issues?q=is%3Aissue+is%3Aopen+label%3Ahelp-wanted">these issues</a>
-or <a href="mailto:gvwilson@third-bit.com">contact the maintainer</a>.
+<a href="https://github.com/lessonomicon/querynomicon/issues?q=is%3Aissue+is%3Aopen+label%3Ahelp-wanted">these issues</a>
+or <a href="mailto:lessonomicon@third-bit.com">contact the maintainer</a>.

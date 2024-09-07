@@ -1,5 +1,5 @@
 ## # Source:   table<`penguins`> [?? x 7]
-## # Database: sqlite 3.45.2 [/Users/tut/sql-tutorial/data/penguins.db]
+## # Database: sqlite 3.45.2 [/Users/tut/data/penguins.db]
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##    <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
 ##  1 Adelie  Torgersen           39.1          18.7               181        3750

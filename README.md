@@ -30,10 +30,10 @@
   </p>
 </div>
 
-[conduct]: https://gvwilson.github.io/sql-tutorial/conduct/
-[contribute]: https://gvwilson.github.io/sql-tutorial/contributing/
-[help_wanted]: https://github.com/gvwilson/sql-tutorial/issues?q=is%3Aissue+is%3Aopen+label%3Ahelp-wanted
-[license]: https://gvwilson.github.io/sql-tutorial/license/
-[release]: https://github.com/gvwilson/sql-tutorial/raw/main/sql-tutorial.zip
-[site]: https://gvwilson.github.io/sql-tutorial/
+[conduct]: https://lessonomicon.github.io/querynomicon/conduct/
+[contribute]: https://lessonomicon.github.io/querynomicon/contributing/
+[help_wanted]: https://github.com/lessonomicon/querynomicon/issues?q=is%3Aissue+is%3Aopen+label%3Ahelp-wanted
+[license]: https://lessonomicon.github.io/querynomicon/license/
+[release]: https://github.com/lessonomicon/querynomicon/raw/main/querynomicon.zip
+[site]: https://lessonomicon.github.io/querynomicon/
 [t3]: https://teachtogether.tech/
