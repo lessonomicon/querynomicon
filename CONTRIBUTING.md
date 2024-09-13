@@ -75,18 +75,21 @@ All contributors will be acknowledged.
     -   A *glossary* that defines terms called out in the topics.
     -   *Acknowledgments* that point at inspirations and thank contributors.
 
-## Tags for Issues and Pull Requests
+## Labels
 
--   `contribute-addition`: a pull request that contains new material
--   `contribute-change`: a pull request that changes or fixes existing material
--   `discuss`: discussion of proposed change or fix
--   `governance`: meta-discussion of project direction, etc.
--   `help-wanted`: requires knowledge or skills the core maintainer lacks
--   `in-content`: issue or PR is related to lesson content
--   `in-infrastructure`: issue or PR is related to build tools, styling, etc.
--   `report-bug`: issue reporting an error
--   `request-addition`: issue asking for new content
--   `request-change`: issue asking for a change to existing content
+| Name             | Description                  | Color   |
+| ---------------- | ---------------------------- | ------- |
+| change           | something different          | #FBCA04 |
+| feature          | new feature                  | #B60205 |
+| fix              | something broken             | #5319E7 |
+| good first issue | newcomers are always welcome | #D4C5F9 |
+| talk             | question or discussion       | #0E8A16 |
+| task             | one-off task                 | #1D76DB |
+
+Please use [Conventional Commits][conventional] style for pull requests
+by using `change:`, `feature:`, `fix:`, or `task:` as the first word
+in the title of the commit message.
+You may also use `publish:` if the PR just rebuilds the HTML version of the lesson.
 
 ## FAQ
 
@@ -132,6 +135,7 @@ Why hand-drawn figures rather than [Graphviz][graphviz] or [Mermaid][mermaid]?
 Why make this tutorial freely available?
 :   Because if we all give a little, we all get a lot.
 
+[conventional]: https://www.conventionalcommits.org/
 [draw_io]: https://www.drawio.com/
 [jekyll]: https://jekyllrb.com/
 [ghp]: https://pages.github.com/
