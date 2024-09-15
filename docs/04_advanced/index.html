@@ -12,7 +12,7 @@
 <main>
 <h1>Advanced Features</h1>
 <h2>Blobs</h2>
-<pre><code file="blob.memory.sql">create table images (
+<pre class="language-sql"><code class="language-sql" file="blob.memory.sql">create table images (
     name text not null,
     content blob
 );
@@ -29,7 +29,7 @@ select
     length(content)
 from images;
 </code></pre>
-<pre><code file="blob.memory.out">|    name     | length(content) |
+<pre class="language-out"><code class="language-out" file="blob.memory.out">|    name     | length(content) |
 |-------------|-----------------|
 | biohazard   | 19629           |
 | crush       | 15967           |
@@ -50,11 +50,11 @@ rather than its length.
 How intelligible is the output?
 Does using SQLite's <code>hex()</code> function make it any more readable?</p>
 <h2 class="aside">Yet Another Database</h2>
-<pre><code file="lab_log_db.sh">sqlite3 db/lab_log.db
+<pre class="language-sh"><code class="language-sh" file="lab_log_db.sh">sqlite3 db/lab_log.db
 </code></pre>
-<pre><code file="lab_log_schema.lab_log.sql">.schema
+<pre class="language-sql"><code class="language-sql" file="lab_log_schema.lab_log.sql">.schema
 </code></pre>
-<pre><code file="lab_log_schema.lab_log.out">CREATE TABLE sqlite_sequence(name,seq);
+<pre class="language-out"><code class="language-out" file="lab_log_schema.lab_log.out">CREATE TABLE sqlite_sequence(name,seq);
 CREATE TABLE person(
        ident            integer primary key autoincrement,
        details          text not null
@@ -70,9 +70,9 @@ CREATE TABLE usage(
 );
 </code></pre>
 <h2>Storing JSON</h2>
-<pre><code file="json_in_table.lab_log.sql">select * from machine;
+<pre class="language-sql"><code class="language-sql" file="json_in_table.lab_log.sql">select * from machine;
 </code></pre>
-<pre><code file="json_in_table.lab_log.out">| ident |      name      |                         details                         |
+<pre class="language-out"><code class="language-out" file="json_in_table.lab_log.out">| ident |      name      |                         details                         |
 |-------|----------------|---------------------------------------------------------|
 | 1     | WY401          | {"acquired": "2023-05-01"}                              |
 | 2     | Inphormex      | {"acquired": "2021-07-15", "refurbished": "2023-10-22"} |
@@ -92,12 +92,12 @@ CREATE TABLE usage(
 </li>
 </ul>
 <h2>Select Fields from JSON</h2>
-<pre><code file="json_field.lab_log.sql">select
+<pre class="language-sql"><code class="language-sql" file="json_field.lab_log.sql">select
     details-&gt;'$.acquired' as single_arrow,
     details-&gt;&gt;'$.acquired' as double_arrow
 from machine;
 </code></pre>
-<pre><code file="json_field.lab_log.out">| single_arrow | double_arrow |
+<pre class="language-out"><code class="language-out" file="json_field.lab_log.out">| single_arrow | double_arrow |
 |--------------|--------------|
 | "2023-05-01" | 2023-05-01   |
 | "2021-07-15" | 2021-07-15   |
@@ -117,13 +117,13 @@ from machine;
 <p>Write a query that selects the year from the <code>"refurbished"</code> field
 of the JSON data associated with the Inphormex plate reader.</p>
 <h2>JSON Array Access</h2>
-<pre><code file="json_array.lab_log.sql">select
+<pre class="language-sql"><code class="language-sql" file="json_array.lab_log.sql">select
     ident,
     json_array_length(log-&gt;'$') as length,
     log-&gt;'$[0]' as first
 from usage;
 </code></pre>
-<pre><code file="json_array.lab_log.out">| ident | length |                            first                             |
+<pre class="language-out"><code class="language-out" file="json_array.lab_log.out">| ident | length |                            first                             |
 |-------|--------|--------------------------------------------------------------|
 | 1     | 4      | {"machine":"Inphormex","person":["Gabrielle","Dub\u00e9"]}   |
 | 2     | 5      | {"machine":"Inphormex","person":["Marianne","Richer"]}       |
@@ -141,14 +141,14 @@ from usage;
 <li>Characters outside 7-bit ASCII represented as Unicode escapes</li>
 </ul>
 <h2>Unpacking JSON Arrays</h2>
-<pre><code file="json_unpack.lab_log.sql">select
+<pre class="language-sql"><code class="language-sql" file="json_unpack.lab_log.sql">select
     ident,
     json_each.key as key,
     json_each.value as value
 from usage, json_each(usage.log)
 limit 10;
 </code></pre>
-<pre><code file="json_unpack.lab_log.out">| ident | key |                            value                             |
+<pre class="language-out"><code class="language-out" file="json_unpack.lab_log.out">| ident | key |                            value                             |
 |-------|-----|--------------------------------------------------------------|
 | 1     | 0   | {"machine":"Inphormex","person":["Gabrielle","Dub\u00e9"]}   |
 | 1     | 1   | {"machine":"Inphormex","person":["Gabrielle","Dub\u00e9"]}   |
@@ -169,13 +169,13 @@ limit 10;
 <p>Write a query that counts how many times each person appears
 in the first log entry associated with any piece of equipment.</p>
 <h2>Selecting the Last Element of an  Array</h2>
-<pre><code file="json_array_last.lab_log.sql">select
+<pre class="language-sql"><code class="language-sql" file="json_array_last.lab_log.sql">select
     ident,
     log-&gt;'$[#-1].machine' as final
 from usage
 limit 5;
 </code></pre>
-<pre><code file="json_array_last.lab_log.out">| ident |    final     |
+<pre class="language-out"><code class="language-out" file="json_array_last.lab_log.out">| ident |    final     |
 |-------|--------------|
 | 1     | "Inphormex"  |
 | 2     | "sterilizer" |
@@ -184,13 +184,13 @@ limit 5;
 | 5     | "sterilizer" |
 </code></pre>
 <h2>Modifying JSON</h2>
-<pre><code file="json_modify.lab_log.sql">select
+<pre class="language-sql"><code class="language-sql" file="json_modify.lab_log.sql">select
     ident,
     name,
     json_set(details, '$.sold', json_quote('2024-01-25')) as updated
 from machine;
 </code></pre>
-<pre><code file="json_modify.lab_log.out">| ident |      name      |                           updated                            |
+<pre class="language-out"><code class="language-out" file="json_modify.lab_log.out">| ident |      name      |                           updated                            |
 |-------|----------------|--------------------------------------------------------------|
 | 1     | WY401          | {"acquired":"2023-05-01","sold":"2024-01-25"}                |
 | 2     | Inphormex      | {"acquired":"2021-07-15","refurbished":"2023-10-22","sold":" |
@@ -206,13 +206,13 @@ from machine;
 replace the machine names in the JSON records in <code>usage</code>
 with the corresopnding machine IDs from the <code>machine</code> table.</p>
 <h2 class="aside">Refreshing the Penguins Database</h2>
-<pre><code file="count_penguins.penguins.sql">select
+<pre class="language-sql"><code class="language-sql" file="count_penguins.penguins.sql">select
     species,
     count(*) as num
 from penguins
 group by species;
 </code></pre>
-<pre><code file="count_penguins.penguins.out">|  species  | num |
+<pre class="language-out"><code class="language-out" file="count_penguins.penguins.out">|  species  | num |
 |-----------|-----|
 | Adelie    | 152 |
 | Chinstrap | 68  |
@@ -222,20 +222,20 @@ group by species;
 <li>We will restore full database after each example</li>
 </ul>
 <h2>Tombstones</h2>
-<pre><code file="make_active.sql">alter table penguins
+<pre class="language-sql"><code class="language-sql" file="make_active.sql">alter table penguins
 add active integer not null default 1;
 
 update penguins
 set active = iif(species = 'Adelie', 0, 1);
 </code></pre>
-<pre><code file="active_penguins.sql:keep">select
+<pre class="language-sql"><code class="language-sql" file="active_penguins.sql:keep">select
     species,
     count(*) as num
 from penguins
 where active
 group by species;
 </code></pre>
-<pre><code file="active_penguins.out">|  species  | num |
+<pre class="language-out"><code class="language-out" file="active_penguins.out">|  species  | num |
 |-----------|-----|
 | Chinstrap | 68  |
 | Gentoo    | 124 |
@@ -255,7 +255,7 @@ group by species;
 </ul>
 </li>
 </ul>
-<pre><code file="create_penguins.sql">drop table if exists penguins;
+<pre class="language-sql"><code class="language-sql" file="create_penguins.sql">drop table if exists penguins;
 .mode csv penguins
 .import misc/penguins.csv penguins
 update penguins set species = null where species = '';
@@ -271,7 +271,7 @@ update penguins set sex = null where sex = '';
 created by the CSV import shown above?
 How can you correct the ones that need correcting?</p>
 <h2>Views</h2>
-<pre><code file="views.sql:keep">create view if not exists
+<pre class="language-sql"><code class="language-sql" file="views.sql:keep">create view if not exists
 active_penguins (
     species,
     island,
@@ -298,7 +298,7 @@ select
 from active_penguins
 group by species;
 </code></pre>
-<pre><code file="views.out">|  species  | num |
+<pre class="language-out"><code class="language-out" file="views.out">|  species  | num |
 |-----------|-----|
 | Chinstrap | 68  |
 | Gentoo    | 124 |
@@ -329,7 +329,7 @@ the second shows the total number of log entries for that machine.</p>
    alt="box and arrow diagram showing different kinds of temporary 'tables' in SQL"
 %]</p>
 <h2 class="aside">Hours Reminder</h2>
-<pre><code file="all_jobs.memory.sql">create table job (
+<pre class="language-sql"><code class="language-sql" file="all_jobs.memory.sql">create table job (
     name text not null,
     billable real not null
 );
@@ -338,13 +338,13 @@ insert into job values
 ('clean', 0.5);
 select * from job;
 </code></pre>
-<pre><code file="all_jobs.memory.out">|   name    | billable |
+<pre class="language-out"><code class="language-out" file="all_jobs.memory.out">|   name    | billable |
 |-----------|----------|
 | calibrate | 1.5      |
 | clean     | 0.5      |
 </code></pre>
 <h2>Adding Checks</h2>
-<pre><code file="all_jobs_check.sql">create table job (
+<pre class="language-sql"><code class="language-sql" file="all_jobs_check.sql">create table job (
     name text not null,
     billable real not null,
     check (billable &gt; 0.0)
@@ -353,7 +353,7 @@ insert into job values ('calibrate', 1.5);
 insert into job values ('reset', -0.5);
 select * from job;
 </code></pre>
-<pre><code file="all_jobs_check.out">Runtime error near line 9: CHECK constraint failed: billable &gt; 0.0 (19)
+<pre class="language-out"><code class="language-out" file="all_jobs_check.out">Runtime error near line 9: CHECK constraint failed: billable &gt; 0.0 (19)
 |   name    | billable |
 |-----------|----------|
 | calibrate | 1.5      |
@@ -385,7 +385,7 @@ select * from job;
 <li><a href="../glossary.html#durable">Durable</a>: if change takes place, it's still there after a restart</li>
 </ul>
 <h2>Transactions</h2>
-<pre><code file="transaction.memory.sql">create table job (
+<pre class="language-sql"><code class="language-sql" file="transaction.memory.sql">create table job (
     name text not null,
     billable real not null,
     check (billable &gt; 0.0)
@@ -399,7 +399,7 @@ rollback;
 
 select * from job;
 </code></pre>
-<pre><code file="transaction.memory.out">|   name    | billable |
+<pre class="language-out"><code class="language-out" file="transaction.memory.out">|   name    | billable |
 |-----------|----------|
 | calibrate | 1.5      |
 </code></pre>
@@ -417,7 +417,7 @@ select * from job;
 </li>
 </ul>
 <h2>Rollback in Constraints</h2>
-<pre><code file="rollback_constraint.sql">create table job (
+<pre class="language-sql"><code class="language-sql" file="rollback_constraint.sql">create table job (
     name text not null,
     billable real not null,
     check (billable &gt; 0.0) on conflict rollback
@@ -431,7 +431,7 @@ insert into job values
 
 select * from job;
 </code></pre>
-<pre><code file="rollback_constraint.out">Runtime error near line 11: CHECK constraint failed: billable &gt; 0.0 (19)
+<pre class="language-out"><code class="language-out" file="rollback_constraint.out">Runtime error near line 11: CHECK constraint failed: billable &gt; 0.0 (19)
 |   name    | billable |
 |-----------|----------|
 | calibrate | 1.5      |
@@ -441,7 +441,7 @@ select * from job;
 <li>But first <code>insert</code> took effect</li>
 </ul>
 <h2>Rollback in Statements</h2>
-<pre><code file="rollback_statement.sql">create table job (
+<pre class="language-sql"><code class="language-sql" file="rollback_statement.sql">create table job (
     name text not null,
     billable real not null,
     check (billable &gt; 0.0)
@@ -455,7 +455,7 @@ insert or rollback into job values
 
 select * from job;
 </code></pre>
-<pre><code file="rollback_statement.out">Runtime error near line 11: CHECK constraint failed: billable &gt; 0.0 (19)
+<pre class="language-out"><code class="language-out" file="rollback_statement.out">Runtime error near line 11: CHECK constraint failed: billable &gt; 0.0 (19)
 |   name    | billable |
 |-----------|----------|
 | calibrate | 1.5      |
@@ -465,7 +465,7 @@ select * from job;
 <li>Action is in statement</li>
 </ul>
 <h2>Upsert</h2>
-<pre><code file="upsert.sql">create table jobs_done (
+<pre class="language-sql"><code class="language-sql" file="upsert.sql">create table jobs_done (
     person text unique,
     num integer default 0
 );
@@ -488,7 +488,7 @@ on conflict(person) do update set num = num + 1;
 .print '\nafter upsert'
 select * from jobs_done;
 </code></pre>
-<pre><code file="upsert.out">after first
+<pre class="language-out"><code class="language-out" file="upsert.out">after first
 | person | num |
 |--------|-----|
 | zia    | 1   |
@@ -564,7 +564,7 @@ write a query that adds or modifies people in the <code>staff</code> table as sh
 </li>
 </ul>
 <h2>Creating Triggers</h2>
-<pre><code file="trigger_setup.sql">-- Track hours of lab work.
+<pre class="language-sql"><code class="language-sql" file="trigger_setup.sql">-- Track hours of lab work.
 create table job (
     person text not null,
     reported real not null check (reported &gt;= 0.0)
@@ -606,12 +606,12 @@ end;
     as <code>old.<em>column</em></code> and <code>new.<em>column</em></code></li>
 </ul>
 <h2>Trigger Not Firing</h2>
-<pre><code file="trigger_successful.memory.sql:keep">insert into job values
+<pre class="language-sql"><code class="language-sql" file="trigger_successful.memory.sql:keep">insert into job values
 ('gene', 1.5),
 ('august', 0.5),
 ('gene', 1.0);
 </code></pre>
-<pre><code file="trigger_successful.memory.out">| person | reported |
+<pre class="language-out"><code class="language-out" file="trigger_successful.memory.out">| person | reported |
 |--------|----------|
 | gene   | 1.5      |
 | august | 0.5      |
@@ -623,11 +623,11 @@ end;
 | august | 0.5   |
 </code></pre>
 <h2>Trigger Firing</h2>
-<pre><code file="trigger_firing.sql:keep">insert into job values
+<pre class="language-sql"><code class="language-sql" file="trigger_firing.sql:keep">insert into job values
 ('gene', 1.0),
 ('august', -1.0);
 </code></pre>
-<pre><code file="trigger_firing.out">Runtime error near line 6: CHECK constraint failed: reported &gt;= 0.0 (19)
+<pre class="language-out"><code class="language-out" file="trigger_firing.out">Runtime error near line 6: CHECK constraint failed: reported &gt;= 0.0 (19)
 
 | person | hours |
 |--------|-------|
@@ -648,7 +648,7 @@ end;
 <p>Does your solution behave correctly when several penguins are added
 by a single <code>insert</code> statement?</p>
 <h2 class="aside">Representing Graphs</h2>
-<pre><code file="lineage_setup.sql">create table lineage (
+<pre class="language-sql"><code class="language-sql" file="lineage_setup.sql">create table lineage (
     parent text not null,
     child text not null
 );
@@ -661,9 +661,9 @@ insert into lineage values
 ('Soledad', 'Lourdes'),
 ('Lourdes', 'Santiago');
 </code></pre>
-<pre><code file="represent_graph.memory.sql:keep">select * from lineage;
+<pre class="language-sql"><code class="language-sql" file="represent_graph.memory.sql:keep">select * from lineage;
 </code></pre>
-<pre><code file="represent_graph.memory.out">|  parent  |  child   |
+<pre class="language-out"><code class="language-out" file="represent_graph.memory.out">|  parent  |  child   |
 |----------|----------|
 | Arturo   | Clemente |
 | Darío    | Clemente |
@@ -682,7 +682,7 @@ insert into lineage values
 <h2 class="exercise">Exercise</h2>
 <p>Write a query that uses a self join to find every person's grandchildren.</p>
 <h2>Recursive Queries</h2>
-<pre><code file="recursive_lineage.memory.sql:keep">with recursive descendent as (
+<pre class="language-sql"><code class="language-sql" file="recursive_lineage.memory.sql:keep">with recursive descendent as (
     select
         'Clemente' as person,
         0 as generations
@@ -699,7 +699,7 @@ select
     generations
 from descendent;
 </code></pre>
-<pre><code file="recursive_lineage.memory.out">|  person  | generations |
+<pre class="language-out"><code class="language-out" file="recursive_lineage.memory.out">|  person  | generations |
 |----------|-------------|
 | Clemente | 0           |
 | Homero   | 1           |
@@ -723,9 +723,9 @@ from descendent;
 Does this affect the result?
 Why or why not?</p>
 <h2 class="aside">Contact Tracing Database</h2>
-<pre><code file="contact_person.contacts.sql">select * from person;
+<pre class="language-sql"><code class="language-sql" file="contact_person.contacts.sql">select * from person;
 </code></pre>
-<pre><code file="contact_person.contacts.out">| ident |         name          |
+<pre class="language-out"><code class="language-out" file="contact_person.contacts.out">| ident |         name          |
 |-------|-----------------------|
 | 1     | Juana Baeza           |
 | 2     | Agustín Rodríquez     |
@@ -743,9 +743,9 @@ Why or why not?</p>
 | 14    | Bernardo Narváez      |
 | 15    | Óscar Barrios         |
 </code></pre>
-<pre><code file="contact_contacts.contacts.sql">select * from contact;
+<pre class="language-sql"><code class="language-sql" file="contact_contacts.contacts.sql">select * from contact;
 </code></pre>
-<pre><code file="contact_contacts.contacts.out">|       left        |         right         |
+<pre class="language-out"><code class="language-out" file="contact_contacts.contacts.out">|       left        |         right         |
 |-------------------|-----------------------|
 | Agustín Rodríquez | Ariadna Caraballo     |
 | Agustín Rodríquez | Verónica Altamirano   |
@@ -763,7 +763,7 @@ Why or why not?</p>
    alt="box and line diagram showing who has had contact with whom"
 %]</p>
 <h2>Bidirectional Contacts</h2>
-<pre><code file="bidirectional.sql:keep">create temporary table bi_contact (
+<pre class="language-sql"><code class="language-sql" file="bidirectional.sql:keep">create temporary table bi_contact (
     left text,
     right text
 );
@@ -775,7 +775,7 @@ select
     select right, left from contact
 ;
 </code></pre>
-<pre><code file="bidirectional.out">| original_count |
+<pre class="language-out"><code class="language-out" file="bidirectional.out">| original_count |
 |----------------|
 | 8              |
 
@@ -791,7 +791,7 @@ select
 <li>Duplicate information rather than writing more complicated query</li>
 </ul>
 <h2>Updating Group Identifiers</h2>
-<pre><code file="update_group_ids.sql:keep">select
+<pre class="language-sql"><code class="language-sql" file="update_group_ids.sql:keep">select
     left.name as left_name,
     left.ident as left_ident,
     right.name as right_name,
@@ -801,7 +801,7 @@ from
     (person as left join bi_contact on left.name = bi_contact.left)
     join person as right on bi_contact.right = right.name;
 </code></pre>
-<pre><code file="update_group_ids.out">|       left_name       | left_ident |      right_name       | right_ident | new_ident |
+<pre class="language-out"><code class="language-out" file="update_group_ids.out">|       left_name       | left_ident |      right_name       | right_ident | new_ident |
 |-----------------------|------------|-----------------------|-------------|-----------|
 | Juana Baeza           | 1          | Micaela Laboy         | 4           | 1         |
 | Juana Baeza           | 1          | Verónica Altamirano   | 5           | 1         |
@@ -825,7 +825,7 @@ from
 <li>Doesn't keep people with no contacts</li>
 </ul>
 <h2>Recursive Labeling</h2>
-<pre><code file="recursive_labeling.contacts.sql:keep">with recursive labeled as (
+<pre class="language-sql"><code class="language-sql" file="recursive_labeling.contacts.sql:keep">with recursive labeled as (
     select
         person.name as name,
         person.ident as label
@@ -845,7 +845,7 @@ from labeled
 group by name
 order by label, name;
 </code></pre>
-<pre><code file="recursive_labeling.contacts.out">|         name          | group_id |
+<pre class="language-out"><code class="language-out" file="recursive_labeling.contacts.out">|         name          | group_id |
 |-----------------------|----------|
 | Agustín Rodríquez     | 1        |
 | Ariadna Caraballo     | 1        |

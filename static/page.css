@@ -1,19 +1,36 @@
 /* Style variables */
 :root {
-    --border-thin: solid 1px gray;
-    --border-medium: solid 3px gray;
+    --border-thin: solid 1px;
+    --border-medium: solid 3px;
+    --color-border: gray;
     --color-background: white;
     --color-background-code: whitesmoke;
     --color-link: #000060;
     --color-text: black;
+
     --expand: 120%;
+
     --height-half-line: 0.75ex;
+
     --width-li-adjust: 1rem;
     --width-ol-adjust: 0.5rem;
     --width-ul-adjust: 0.2rem;
     --width-padding: 5px;
     --width-page: 72rem;
     --width-page-margin: 1rem;
+
+    --stamp-blue-dark: #1B2A83;
+    --stamp-blue-light: #BABDD8;
+    --stamp-brown-dark: #5F483C;
+    --stamp-brown-light: #CEC7C3;
+    --stamp-green-dark: #7F9971;
+    --stamp-green-light: #A7E0A3;
+    --stamp-orange-dark: #AD7353;
+    --stamp-orange-light: #E5D4CB;
+    --stamp-purple-dark: #7D6E87;
+    --stamp-purple-light: #D6D2DA;
+    --stamp-red-dark: #8B000F;
+    --stamp-red-light: #DAB3B7;
 }
 
 /* Generic coloring */
@@ -56,7 +73,7 @@ a {
 
 /* Block quotes */
 blockquote {
-    border: var(--border-medium);
+    border: var(--border-medium) var(--color-border);
     padding-left: var(--width-page-margin);
     padding-right: var(--width-page-margin);
 }
@@ -87,7 +104,7 @@ dd:last-of-type {
 
 /* Footer */
 footer {
-    border-top: var(--border-thin);
+    border-top: var(--border-thin) var(--color-border);
     margin-top: var(--height-half-line);
     padding-top: var(--height-half-line);
     text-align: center;
@@ -126,10 +143,59 @@ p.subtitle {
 
 /* Code blocks */
 pre {
-    border: var(--border-thin);
+    border: var(--border-thin) var(--color-border);
     padding: var(--width-padding);
     background-color: var(--color-background-code);
 }
+
+/* Generic output */
+pre[class*='language'] {
+    border-left: var(--border-medium);
+    border-top: var(--border-thin);
+    border-bottom: var(--border-thin);
+    border-right: 0px;
+    padding-left: var(--width-padding);
+}
+
+/* Data files */
+pre.language-csv,
+pre.language-json,
+pre.language-md,
+pre.language-toml,
+pre.language-yml {
+    border-color: var(--stamp-orange-light);
+}
+
+/* JavaScript */
+pre.language-js {
+    border-color: var(--stamp-blue-light);
+}
+
+/* Output */
+pre.language-out {
+    border-color: var(--stamp-brown-light);
+}
+
+/* Python */
+pre.language-py {
+    border-color: var(--stamp-blue-light);
+}
+
+/* Shell */
+pre.language-sh {
+    border-color: var(--stamp-green-light);
+}
+
+/* SQL */
+pre.language-sql {
+    border-color: var(--stamp-red-light);
+}
+
+/* Transcripts */
+pre.language-text {
+    border-color: var(--stamp-purple-light);
+}
+
 
 /* Tables */
 table {
