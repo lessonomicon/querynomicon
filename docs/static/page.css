@@ -102,6 +102,13 @@ dd:last-of-type {
     margin-bottom: 0px;
 }
 
+/* Figure */
+figure {
+    text-align: center;
+    border: var(--border-thin) var(--color-border);
+    padding: var(--width-padding);
+}
+
 /* Footer */
 footer {
     border-top: var(--border-thin) var(--color-border);

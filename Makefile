@@ -23,11 +23,6 @@ profile:
 	mccole profile ${CSS}
 	@touch docs/.nojekyll
 
-## refresh: convert to HTML, refreshing code samples
-refresh:
-	mccole render --refresh ${CSS}
-	@touch docs/.nojekyll
-
 ## serve: serve generated HTML
 serve:
 	@python -m http.server -d docs $(PORT)

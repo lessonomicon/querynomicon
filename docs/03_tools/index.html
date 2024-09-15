@@ -614,18 +614,14 @@ so that it is true in both cases.</p>
 <li><a href="../glossary.html#er_diagram">Entity-relationship diagram</a> (ER diagram) shows relationships between tables</li>
 <li>Like everything to do with databases, there are lots of variations</li>
 </ul>
-<p>[% figure
-   slug="assays_tables"
-   img="assays_tables.svg"
-   caption="assay database table diagram"
-   alt="table-level diagram of assay database showing primary and foreign key relationships"
-%]</p>
-<p>[% figure
-   slug="assays_er"
-   img="assays_er.svg"
-   caption="assay ER diagram"
-   alt="entity-relationship diagram showing logical structure of assay database"
-%]</p>
+<figure id="tools_assays_tables">
+<img alt="table-level diagram of assay database showing primary and foreign key relationships" src="tools_assays_tables.svg"/>
+<figcaption>Figure 1: Assay Database Table Diagram</figcaption>
+</figure>
+<figure id="assays_er">
+<img alt="entity-relationship diagram showing logical structure of assay database" src="assays_er.svg"/>
+<figcaption>Figure 2: Assay ER Diagram</figcaption>
+</figure>
 <pre><code class="language-sql" file="assay_staff.assays.sql">select * from staff;
 </code></pre>
 <pre><code class="language-out" file="assay_staff.assays.out">| ident | personal |  family   | dept | age |

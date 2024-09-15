@@ -86,12 +86,10 @@ after insertion [(10,), (20,)]
 
 -   From [XKCD][xkcd_tables]
 
-[% figure
-   slug="python_xkcd"
-   img="xkcd_327_exploits_of_a_mom.png"
-   alt="XKCD cartoon showing a mother scolding a school for not being more careful about SQL injection attacks"
-   caption="XKCD Exploits of a Mom"
-%]
+<figure id="python_xkcd">
+  <img src="xkcd_327_exploits_of_a_mom.png" alt="XKCD cartoon showing a mother scolding a school for not being more careful about SQL injection attacks">
+  <figcaption>Figure 1: XKCD Exploits of a Mom</figcaption>
+</figure>
 
 ## Exercise {: .exercise}
 

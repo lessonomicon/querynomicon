@@ -601,19 +601,15 @@ so that it is true in both cases.
 -   [Entity-relationship diagram](g:er_diagram) (ER diagram) shows relationships between tables
 -   Like everything to do with databases, there are lots of variations
 
-[% figure
-   slug="assays_tables"
-   img="assays_tables.svg"
-   caption="assay database table diagram"
-   alt="table-level diagram of assay database showing primary and foreign key relationships"
-%]
+<figure id="tools_assays_tables">
+  <img src="tools_assays_tables.svg" alt="table-level diagram of assay database showing primary and foreign key relationships">
+  <figcaption>Figure 1: Assay Database Table Diagram</figcaption>
+</figure>
 
-[% figure
-   slug="assays_er"
-   img="assays_er.svg"
-   caption="assay ER diagram"
-   alt="entity-relationship diagram showing logical structure of assay database"
-%]
+<figure id="assays_er">
+  <img src="assays_er.svg" alt="entity-relationship diagram showing logical structure of assay database">
+  <figcaption>Figure 2: Assay ER Diagram</figcaption>
+</figure>
 
 ```{file="assay_staff.assays.sql"}
 select * from staff;

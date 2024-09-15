@@ -121,7 +121,6 @@ Why make this tutorial freely available?
     If we all give a little,
     we all get a lot.
 
-
 [bs4]: https://pypi.org/project/beautifulsoup4/
 [conventional]: https://www.conventionalcommits.org/
 [corrales_pao]: https://paocorrales.github.io/

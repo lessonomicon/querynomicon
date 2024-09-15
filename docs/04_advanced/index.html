@@ -322,12 +322,10 @@ group by species;
 The first column records the numeric ID of each machine;
 the second shows the total number of log entries for that machine.</p>
 <h2 class="aside">Check Understanding</h2>
-<p>[% figure
-   slug="composite_temp_concept_map"
-   img="composite_temp_concept_map.svg"
-   caption="temporary tables"
-   alt="box and arrow diagram showing different kinds of temporary 'tables' in SQL"
-%]</p>
+<figure id="advanced_temp_concept_map">
+<img alt="box and arrow diagram showing different kinds of temporary 'tables' in SQL" src="advanced_temp_concept_map.svg"/>
+<figcaption>Figure 1: Temporary Tables</figcaption>
+</figure>
 <h2 class="aside">Hours Reminder</h2>
 <pre><code class="language-sql" file="all_jobs.memory.sql">create table job (
     name text not null,
@@ -673,12 +671,10 @@ insert into lineage values
 | Soledad  | Lourdes  |
 | Lourdes  | Santiago |
 </code></pre>
-<p>[% figure
-   slug="recursive_lineage"
-   img="recursive_lineage.svg"
-   caption="lineage diagram"
-   alt="box and arrow diagram showing who is descended from whom in the lineage database"
-%]</p>
+<figure id="advanced_recursive_lineage">
+<img alt="box and arrow diagram showing who is descended from whom in the lineage database" src="advanced_recursive_lineage.svg"/>
+<figcaption>Figure 2: Lineage Diagram</figcaption>
+</figure>
 <h2 class="exercise">Exercise</h2>
 <p>Write a query that uses a self join to find every person's grandchildren.</p>
 <h2>Recursive Queries</h2>
@@ -756,12 +752,10 @@ Why or why not?</p>
 | Cristal Soliz     | Daniela Menéndez      |
 | Daniela Menéndez  | Marco Antonio Barrera |
 </code></pre>
-<p>[% figure
-   slug="recursive_contacts"
-   img="recursive_contacts.svg"
-   caption="contact diagram"
-   alt="box and line diagram showing who has had contact with whom"
-%]</p>
+<figure id="advanced_recursive_contacts">
+<img alt="box and line diagram showing who has had contact with whom" src="advanced_recursive_contacts.svg"/>
+<figcaption>Figure 3: Contact Diagram</figcaption>
+</figure>
 <h2>Bidirectional Contacts</h2>
 <pre><code class="language-sql" file="bidirectional.sql:keep">create temporary table bi_contact (
     left text,
@@ -871,12 +865,10 @@ order by label, name;
 How can you modify the query so that it stops at a certain depth
 so that you can trace its output?</p>
 <h2 class="aside">Check Understanding</h2>
-<p>[% figure
-   slug="recursive_concept_map"
-   img="recursive_concept_map.svg"
-   caption="common table expressions"
-   alt="box and arrow diagram showing concepts related to common table expressions in SQL"
-%]</p>
+<figure id="advanced_cte_concept_map">
+<img alt="box and arrow diagram showing concepts related to common table expressions in SQL" src="advanced_cte_concept_map.svg"/>
+<figcaption>Figure 4: Common Table Expressions</figcaption>
+</figure>
 </main>
 <footer>
 <a href="../">The Webonomicon</a>

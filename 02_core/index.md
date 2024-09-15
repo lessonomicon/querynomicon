@@ -356,12 +356,10 @@ or look at [the documentation for SQLite's `format()` function][sqlite_format].
 
 ## Check Understanding {: .aside}
 
-[% figure
-   slug="select_concept_map"
-   img="select_concept_map.svg"
-   alt="box and arrow diagram of concepts related to selection"
-   caption="selection"
-%]
+<figure id="core_select_concept_map">
+  <img src="core_select_concept_map.svg" alt="box and arrow diagram of concepts related to selection">
+  <figcaption>Figure 1: Selection</figcaption>
+</figure>
 
 ## Calculating with Missing Values
 
@@ -539,12 +537,10 @@ where sex is null;
 
 ## Check Understanding {: .aside}
 
-[% figure
-   slug="missing_concept_map"
-   img="missing_concept_map.svg"
-   alt="box and arrow diagram of concepts related to null values in SQL"
-   caption="missing values"
-%]
+<figure id="core_missing_concept_map">
+  <img src="core_missing_concept_map.svg" alt="box and arrow diagram of concepts related to null values in SQL">
+  <figcaption>Figure 2: Missing Values</figcaption>
+</figure>
 
 ## Aggregating
 
@@ -749,12 +745,10 @@ Is it possible to do this using `where` instead of `filter`?
 
 ## Check Understanding {: .aside}
 
-[% figure
-   slug="aggregate_concept_map"
-   img="aggregate_concept_map.svg"
-   caption="aggregation"
-   alt="box and arrow diagram of concepts related to aggregation in SQL"
-%]
+<figure id="core_aggregate_concept_map">
+  <img src="core_aggregate_concept_map.svg" alt="box and arrow diagram of concepts related to aggregation in SQL">
+  <figcaption>Figure 3: Aggregation</figcaption>
+</figure>
 
 ## Creating In-memory Database {: .aside}
 
@@ -938,12 +932,10 @@ Saving and restoring data in binary format:
 
 ## Check Understanding {: .aside}
 
-[% figure
-   slug="datamod_concept_map"
-   img="datamod_concept_map.svg"
-   caption="data definition and modification"
-   alt="box and arrow diagram of concepts relatd to defining and modifying data"
-%]
+<figure id="core_datamod_concept_map">
+  <img src="core_datamod_concept_map.svg" alt="box and arrow diagram of concepts relatd to defining and modifying data">
+  <figcaption>Figure 4: Data Definition and Modification</figcaption>
+</figure>
 
 ## Combining Information
 
@@ -1119,12 +1111,10 @@ using the SQL you have seen so far?
 
 ## Check Understanding {: .aside}
 
-[% figure
-   slug="join_concept_map"
-   img="join_concept_map.svg"
-   caption="join"
-   alt="box and arrow diagram of concepts related to joining tables"
-%]
+<figure id="core_join_concept_map">
+  <img src="core_join_concept_map.svg" alt="box and arrow diagram of concepts related to joining tables">
+  <figcaption>Figure 5: Join</figcaption>
+</figure>
 
 [sqlfluff]: https://sqlfluff.com/
 [sqlite_format]: https://sqlite.org/printf.html
