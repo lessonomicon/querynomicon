@@ -91,12 +91,27 @@ by using `change:`, `feature:`, `fix:`, or `task:` as the first word
 in the title of the commit message.
 You may also use `publish:` if the PR just rebuilds the HTML version of the lesson.
 
+## Contributors
+
+**[Greg Wilson][wilson_greg]**
+was the co-founder and first Executive Director of Software Carpentry
+and received ACM SIGSOFT's Influential Educator Award in 2020.
+
+**[Konstantinos Kitsios][kitsios_konstantinos]**
+is a PhD student at University of Zurich,
+working on applications of machine learning to software engineering.
+Previously he worked as a software engineer at Tesla.
+
+**[Pao Corrales][corrales_pao]**
+has a PhD in Atmospheric Sciences and works on improving severe weather forecasts in Argentina.
+She loves teaching science and programming using evidence-based techniques centered on the students and their context.
+
 ## FAQ
 
 Why SQL?
 :   Because if you dig down far enough,
     almost every data science project sits on top of a relational database.
-    ([Jon Udell][udell] once called [PostgreSQL][postgresql]
+    ([Jon Udell][udell_jon] once called [PostgreSQL][postgresql]
     "an operating system for data science".)
     SQL's relational model has also been a powerful influence
     on dataframe libraries like [the tidyverse][tidyverse],
@@ -104,7 +119,7 @@ Why SQL?
     and [Polars][polars];
     understanding the former therefore helps people understand the latter.
 
-Why Ark?
+Why [McCole][mccole]?
 :   The first version of this tutorial used [Jekyll][jekyll]
     because it is the default for [GitHub Pages][ghp]
     and because its frustrating limitations would discourage contributors
@@ -135,16 +150,49 @@ Why hand-drawn figures rather than [Graphviz][graphviz] or [Mermaid][mermaid]?
 Why make this tutorial freely available?
 :   Because if we all give a little, we all get a lot.
 
+## Colophon
+
+-   The tutorial text uses [Atkinson Hyperlegible][atkinson],
+    which was designed to be easy for people with impaired vision to read.
+    Code uses Source Code Pro and diagrams use Helvetica.
+
+-   The colors in this theme
+    are lightened versions of those used in [classic Canadian postage stamps][stamps].
+    The art in the title is by [Danielle Navarro][navarro_danielle]
+    and used with her gracious permission.
+
+-   The CSS files used to style code were obtained from [highlight-css][highlight_css];
+    legibility was checked using [WebAIM WAVE][wave].
+
+-   Diagrams were created with the desktop version of [draw.io][draw_io].
+
+-   The site is hosted on [GitHub Pages][ghp].
+
+-   Traffic statistics are collected using [Plausible][plausible],
+    which provides a lightweight ethical alternative to surveillance capitalism.
+
+-   Thanks to the authors of [BeautifulSoup][bs4],
+    [html5validator][html5validator],
+    [ruff][ruff],
+    and all the other software used in this project.
+    If we all give a little,
+    we all get a lot.
+
+
 [conventional]: https://www.conventionalcommits.org/
+[corrales_pao]: https://paocorrales.github.io/
 [draw_io]: https://www.drawio.com/
-[jekyll]: https://jekyllrb.com/
 [ghp]: https://pages.github.com/
 [glosario]: https://glosario.carpentries.org/
 [graphviz]: https://graphviz.org/
+[jekyll]: https://jekyllrb.com/
+[kitsios_konstantinos]: https://kitsiosk.github.io/
+[mccole]: https://pypi.org/project/mccole/
 [mermaid]: https://mermaid.js.org/
 [palmer_penguins]: https://allisonhorst.github.io/palmerpenguins/
 [pandas]: https://pandas.pydata.org/
 [polars]: https://pola.rs/
 [postgresql]: https://www.postgresql.org/
 [tidyverse]: https://www.tidyverse.org/
-[udell]: https://blog.jonudell.net/
+[udell_jon]: https://blog.jonudell.net/
+[wilson_greg]: https://third-bit.com/

@@ -1,0 +1,24 @@
+[project]
+name = "querynonomicon"
+version = "0.3.0"
+dependencies = [
+    "adbc-driver-sqlite",
+    "click",
+    "faker",
+    "jupysql",
+    "jupyter",
+    "pandas",
+    "polars",
+    "pyarrow",
+    "sqlmodel",
+    "sqlparse"
+]
+
+[tool.mccole]
+skips = ["bin", "templates"]
+
+[tool.mccole.renames]
+"CODE_OF_CONDUCT.md" = "code_of_conduct.md"
+"CONTRIBUTING.md" = "contributing.md"
+"LICENSE.md" = "license.md"
+"README.md" = "index.md"
