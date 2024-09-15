@@ -1,90 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="logo.svg">
-<link rel="stylesheet" href="tango.css" type="text/css">
-<link rel="stylesheet" href="mccole.css" type="text/css">
+
+<html>
+<head>
 <title>The Querynomicon</title>
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [['\\(', '\\)']]
-    }
-  };
-</script>
-<script
-  type="text/javascript"
-  id="MathJax-script"
-  async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
-
-  <script defer data-domain="lessonomicon.github.io/querynomicon" src="https://plausible.io/js/plausible.js"></script>
-
-
-  </head>
-  <body>
-    <main>
-      <div class="row notex">
-  <div class="col-12 center">
-    
-      <h1>The Querynomicon</h1>
-      <p class="subtitle">An Introduction to SQL for the Cautious and Weary</p>
-    
-  </div>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="./static/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="./static/page.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<main>
+<h1>The Querynomicon</h1>
+<p class="subtitle">An Introduction to SQL for the Cautious and Weary</p>
+<div class="row">
+<div class="col-4 center">
+<img alt="Advent 215 by Danielle Navarro" src="./static/advent_04_215.png" style="width: 80%"/>
 </div>
+<div class="col-8">
+<pre><code>Upon first encountering SQL after two decades of Fortran, C, Java, and Python,
+I thought I had stumbled into hell.
+I quickly realized that was optimistic:
+after all,
+hell has rules.
 
-      
+I have since realized that SQL does too,
+and that they are no more confusing or contradictory than those of most other programming languages.
+They only appear so because it draws on a tradition unfamiliar to those of us raised with derivatives of C.
+To quote [Terry Pratchett][pratchett_terry],
+it is not mad, just differently sane.
 
-      
-      
-      <div class="row">
-  <div class="col-4 center">
-    <p>
-      <img class="splash" src="advent_04_215-resized.png" alt="cover art by Danielle Navarro"/>
-    </p>
-  </div>
-  <div class="col-8">
-    <p>
-      Upon first encountering SQL after two decades of Fortran, C, Java, and Python,
-      I thought I had stumbled into hell.
-      I quickly realized that was optimistic:
-      after all,
-      hell has rules.
-    </p>
-    <p>
-      I have since realized that SQL does too,
-      and that they are no more confusing or contradictory than those of most other programming languages.
-      They only appear so because it draws on a tradition unfamiliar to those of us raised with derivatives of C.
-      To quote <a href="https://terrypratchett.com/">Terry Pratchett</a>,
-      it is not mad, just differently sane.
-    </p>
-    <p>
-      Welcome, then, to a world in which the strange will become familiar, and the familiar, strange.
-      Welcome, thrice welcome, to SQL.
-    </p>
-  </div>
+Welcome, then, to a world in which the strange will become familiar, and the familiar, strange.
+Welcome, thrice welcome, to SQL.
+</code></pre>
 </div>
-
-<div class="row"><div class="col-6"><ol class="toc-chapters"><li><a href="intro/">Introduction</a></li><li><a href="core/">Core Features</a></li><li><a href="tools/">Tools</a></li><li><a href="advanced/">Advanced Features</a></li><li><a href="python/">Python</a></li><li><a href="r/">R</a></li><li><a href="psql/">PostgreSQL</a></li><li><a href="finale/">Conclusion</a></li></ol></div>
-<div class="col-6"><ol class="toc-appendices"><li><a href="license/">License</a></li><li><a href="conduct/">Code of Conduct</a></li><li><a href="contrib/">Contributing</a></li><li><a href="bib/">Bibliography</a></li><li><a href="glossary/">Glossary</a></li><li><a href="author/">About the Authors</a></li><li><a href="colophon/">Colophon</a></li></ol></div></div>
-
-<h2>Help Wanted</h2>
-<p>If you would like to help get this tutorial to a usable state,
-please see
-<a href="https://github.com/lessonomicon/querynomicon/issues?q=is%3Aissue+is%3Aopen+label%3Ahelp-wanted">these issues</a>
-or <a href="mailto:lessonomicon@third-bit.com">contact the maintainer</a>.</p>
-    </main>
-    <footer>
-  © 2024 <a href="https://third-bit.com/">Greg Wilson</a>
-  &middot;
-  <a href="#">home</a>
-  &middot;
-  <a href="https://github.com/lessonomicon/querynomicon">repository</a>
-  &middot;
-  <a href="license/">license</a>
+</div>
+<ul>
+<li>
+<p>Please see <a href="https://lessonomicon.github.io/querynomicon/">the website</a> to view the current version of this tutorial.</p>
+</li>
+<li>
+<p><a href="https://github.com/lessonomicon/querynomicon/raw/main/querynomicon.zip">Download the SQLite databases used in these examples</a>.</p>
+</li>
+<li>
+<p>Contributions are very welcome:
+    please see the <a href="https://lessonomicon.github.io/querynomicon/contributing/">contributors' guide</a> for background
+    and <a href="https://github.com/lessonomicon/querynomicon/issues?q=is%3Aissue+is%3Aopen+label%3Ahelp-wanted">these issues</a> for items where assistance would be most appreciated.
+    Please also see our <a href="https://lessonomicon.github.io/querynomicon/license/">license</a> for terms of use,
+    and note that all contributors are required to abide by our <a href="https://lessonomicon.github.io/querynomicon/conduct/">Code of Conduct</a>.</p>
+</li>
+</ul>
+<blockquote>
+<p>This lesson notes and working examples for instructors to use as a starting point.
+We do <em>not</em> expect novices with no prior SQL experience to be able to learn from this on their own.
+As a musical analogy,
+these notes are the chord changes and melody;
+we expect instructors to create an arrangement and/or improvise over the material
+when delivering it.
+Please see <a href="https://teachtogether.tech/"><em>Teaching Tech Together</em></a> for background.</p>
+</blockquote>
+<p class="center">
+<em>
+    Start where you are
+    <br/>
+    Use what you have
+    <br/>
+    Help who you can
+  </em>
+</p>
+<h2>Syllabus</h2>
+<ol class="chapters">
+<li><a href="./01_intro/index.html">Introduction</a>: where we're going and why</li>
+<li><a href="./02_core/index.html">Core Features</a>: getting values from tables</li>
+<li><a href="./03_tools/index.html">Tools</a>: Miscellaneous things that make life easier</li>
+<li><a href="./04_advanced/index.html">Advanced Features</a>: when you need 'em, you need 'em</li>
+<li><a href="./05_python/index.html">Python</a>: using databases from Python</li>
+<li><a href="./06_r/index.html">R</a>: using databases from R</li>
+<li><a href="./07_psql/index.html">PostgreSQL</a>: client-server computing and permissions</li>
+<li><a href="./08_finale/index.html">Conclusion</a>: where we've been and what comes next</li>
+</ol>
+<h2>Appendices</h2>
+<ol class="appendices">
+<li><a href="./bibliography.html">Bibliography</a></li>
+<li><a href="./glossary.html">Glossary</a></li>
+<li><a href="./license.html">License</a></li>
+<li><a href="./code_of_conduct.html">Code of Conduct</a></li>
+<li><a href="./contributing.html">Contributing</a></li>
+</ol>
+</main>
+<footer>
+<a href="./">The Webonomicon</a>
+      copyright © 2024
+      <a href="./contributing.html#contributors">the authors</a>
 </footer>
-
-  </body>
+</body>
 </html>

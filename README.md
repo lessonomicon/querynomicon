@@ -44,17 +44,15 @@
 > when delivering it.
 > Please see [*Teaching Tech Together*][t3] for background.
 
-<div align="center">
-  <p>
-    <em>
-      Start where you are
-      <br/>
-      Use what you have
-      <br/>
-      Help who you can
-    </em>
-  </p>
-</div>
+<p class="center">
+  <em>
+    Start where you are
+    <br/>
+    Use what you have
+    <br/>
+    Help who you can
+  </em>
+</p>
 
 ## Syllabus
 
@@ -62,11 +60,11 @@
 
 1.  [Introduction](./01_intro/index.md): where we're going and why
 1.  [Core Features](./02_core/index.md): getting values from tables
-1.  [Tools](./03_server/index.md): Miscellaneous things that make life easier
-1.  [Advanced Features](./04_db/index.md): when you need 'em, you need 'em
+1.  [Tools](./03_tools/index.md): Miscellaneous things that make life easier
+1.  [Advanced Features](./04_advanced/index.md): when you need 'em, you need 'em
 1.  [Python](./05_python/index.md): using databases from Python
 1.  [R](./06_r/index.md): using databases from R
-1.  [PostgreSQL](./07_forms/index.md): client-server computing and permissions
+1.  [PostgreSQL](./07_psql/index.md): client-server computing and permissions
 1.  [Conclusion](./08_finale/index.md): where we've been and what comes next
 
 </ol>

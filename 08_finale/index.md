@@ -1,6 +1,3 @@
----
-title: "Conclusion"
-tagline: "Where we've been and what comes next."
----
+# Conclusion
 
--   See also [%b Dombrovskaya2021 Fontaine2022 %]
+-   See also [[Dombrovskaya2021](b:Dombrovskaya2021) [Fontaine2022](b:Fontaine2022)]

@@ -1,7 +1,4 @@
----
-title: "PostgreSQL"
-tagline: "Client-server computing and permissions"
----
+# PostgreSQL
 
 *Contributed by [Konstantinos Kitsios][kitsios_konstantinos].*
 
@@ -10,7 +7,7 @@ tagline: "Client-server computing and permissions"
 -   This is a valid question, especially if you are already familiar with other databases like SQLite
     that are simpler to set up,
     run locally,
-    and do not follow the [client-server model](#what-is-the-client-server-model-after-all).
+    and do not follow the client-server model.
 -   The answer is that the client-server model that PostgreSQL follows offers robustness,
     scalability,
     and effectiveness in handling large volumes of data.
@@ -20,11 +17,11 @@ tagline: "Client-server computing and permissions"
 
 ## The Client-Server Model
 
--   A [%g local_db "local (non-client-server) database" %]
+-   A [local (non-client-server) database](g:local_db)
     is designed to run on a single computer or device,
     storing data locally and accessed by applications on the same machine.
 -   This setup is ideal for standalone applications where simplicity and ease of deployment are priorities.
--   On the other hand, a [%g client_server_db "client-server database" %]
+-   On the other hand, a [client-server database](g:client_server_db)
     operates on a networked environment where the database server runs independently of client applications.
 -   Clients connect to the server over a network to query, update, and manage data.
     -   Of course the server and the client can live on the same machine.
@@ -92,24 +89,30 @@ tagline: "Client-server computing and permissions"
 
 -   Run the query to see the first entries of the `penguins` table.
 
-[%inc select_penguins.sql %]
+```{file="select_penguins.sql"}
+select * from penguins limit 10;
+```
 
 -   Count penguins:
 
-[%inc count_penguins.sql %]
+```{file="count_penguins.sql"}
+select count(*) from penguins;
+```
 
 ## Running Queries in the Terminal
 
 -   Run the command-line PostgreSQL client and tell it what database to use:
 
-[%inc run_psql_penguins.sh %]
+```{file="run_psql_penguins.sh"}
+psql -d penguins 
+```
 
 -   Run the queries from the previous section
 
 ## Privileges and Roles
 
 -   PostgreSQL is commonly used for applications with a large user base.
--   For this reason, it has a [%g privilege "privilege managment system" %]
+-   For this reason, it has a [privilege managment system](g:privilege)
     to control who has what kind of access to what data.
     -   You may want the users of your application to be able to read the SQL records,
         but not update or delete them.
@@ -119,7 +122,7 @@ tagline: "Client-server computing and permissions"
 
 ## Creating a Role and Granting Privileges
 
--   A database [%g role "role" %] is similar to a user account
+-   A database [role](g:role) is similar to a user account
     -   Can own database objects
     -   Can be granted permissions to access and manipulate data
 
@@ -143,11 +146,17 @@ tagline: "Client-server computing and permissions"
 
 -   Create role in the terminal:
 
-[%inc create_reader_writer.sql %]
+```{file="create_reader_writer.sql"}
+create role penguin_reader_writer
+with login password 'reader_writer';
+```
 
 -   Grant permissions in the terminal:
 
-[%inc grant_select_update.sql %]
+```{file="grant_select_update.sql"}
+grant select, update on penguins
+to penguin_reader_writer;
+```
 
 ## Verifying Privileges in PgAdmin
 
@@ -165,20 +174,31 @@ tagline: "Client-server computing and permissions"
     but instead of "PostgreSQL", select the "Penguin Reader Writer" as the user ID.
 -   Run a simple query that *reads* data:
 
-[%inc select_penguins.sql %]
+```{file="select_penguins.sql"}
+select * from penguins limit 10;
+```
 
 -   It successfully returns 10 records from the table.
 
 -   Now try to *change* data:
 
-[%inc update_penguins.sql %]
+```{file="update_penguins.sql"}
+update penguins
+set island = 'Antarctica'
+where sex = 'MALE' and island = 'Torgersen';
+```
 
 -   That works too (updates 23 records).
 
 -   But now try to *delete* data:
 
-[%inc delete_penguins.sql %]
-[%inc delete_penguins.out %]
+```{file="delete_penguins.sql"}
+delete from penguins
+where island='Antarctica' and sex='MALE';
+```
+```{file="delete_penguins.out"}
+psql:delete_penguins.sql:2: ERROR:  permission denied for table penguins
+```
 
 -   Because the `penguin_reader_writer` role does not have `DELETE` privileges
 
@@ -192,9 +212,22 @@ tagline: "Client-server computing and permissions"
     4.  Click "Save".
 -   In the terminal:
 
-[%inc revoke_update.sql %]
+```{file="revoke_update.sql"}
+revoke update on penguins
+from penguin_reader_writer;
+```
 
 -   To verify:
 
-[%inc update_penguins_again.sql %]
-[%inc update_penguins_again.out %]
+```{file="update_penguins_again.sql"}
+update penguins
+set island = 'Atlantis'
+where sex = 'MALE' and island = 'Antarctica';
+```
+```{file="update_penguins_again.out"}
+psql:update_penguins_again.sql:3: ERROR:  permission denied for table penguins
+```
+
+[kitsios_konstantinos]: https://kitsiosk.github.io/
+[postgresql_macos_app]: https://postgresapp.com/downloads.html
+[postgresql_macos_latest]: https://www.enterprisedb.com/downloads/postgres-postgresql-downloads

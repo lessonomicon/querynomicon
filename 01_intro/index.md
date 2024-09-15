@@ -1,7 +1,4 @@
----
-title: "Introduction"
-tagline: "Where we're going and why."
----
+# Introduction
 
 ## What This Is
 
@@ -18,7 +15,7 @@ tagline: "Where we're going and why."
     -   Rachel has a master's degree in cell biology
         and now works in a research hospital doing cell assays.
     -   She learned a bit of R in an undergrad biostatistics course
-        and has been through [the Carpentries lesson on the Unix shell][carpentries-shell].
+        and has been through [the Carpentries lesson on the Unix shell][carpentries_shell].
     -   Rachel is thinking about becoming a data scientist
         and would like to understand how data is stored and managed.
     -   Her work schedule is unpredictable and highly variable,
@@ -39,7 +36,7 @@ tagline: "Where we're going and why."
 
 ## Setup {: .aside}
 
--   Download [the latest release]([% config "release" %])
+-   Download the latest release
 -   Unzip the file in a temporary directory to create:
     -   `./db/*.db`: the [SQLite][sqlite] databases used in the examples
     -   `./src/*.*`: SQL queries, Python scripts, and other source code
@@ -47,16 +44,16 @@ tagline: "Where we're going and why."
 
 ## Background Concepts {: .aside}
 
--   A [%g database "database" %] is a collection of data that can be searched and retrieved
--   A [%g dbms "database management system" %] (DBMS) is a program that manages a particular kind of database
+-   A [database](g:database) is a collection of data that can be searched and retrieved
+-   A [database management system](g:dbms) (DBMS) is a program that manages a particular kind of database
 -   Each DBMS stores data in its own way
     -   SQLite stores each database in a single file
     -   [PostgreSQL][postgresql] spreads information across many files for higher performance
 -   DBMS can be a library embedded in other programs (SQLite) or a server (PostgreSQL)
--   A [%g rdbms "relational database management system" %] (RDBMS) stores data in [%g table "tables" %]
+-   A [relational database management system](g:rdbms) (RDBMS) stores data in [tables](g:table)
     and uses [SQL][sql] for queries
     -   Unfortunately, every RDBMS has its own dialect of SQL
--   There are also [%g nosql "NoSQL databases" %] like [MongoDB][mongodb] that don't use tables
+-   There are also [NoSQL databases](g:nosql) like [MongoDB][mongodb] that don't use tables
 
 [% figure
    slug="intro_concept_map"
@@ -67,7 +64,9 @@ tagline: "Where we're going and why."
 
 ## Connecting to Database {: .aside}
 
-[%inc connect_penguins.sh %]
+```{file="connect_penguins.sh"}
+sqlite3 db/penguins.db
+```
 
 -   Not actually a query: starts an interactive session with the database in `db/penguins.db`
 -   Alternative: provide a single query on the command line <code>sqlite3 <em>database</em> "<em>query</em>"</code>
@@ -87,10 +86,40 @@ tagline: "Where we're going and why."
 This tutorial would not have been possible without:
 
 -   [Andi Albrecht][albrecht_andi]'s [`sqlparse`][sqlparse] module
--   [Dimitri Fontaine][fontaine_dimitri]'s [*The Art of PostgreSQL*][art-postgresql]
+-   [Dimitri Fontaine][fontaine_dimitri]'s [*The Art of PostgreSQL*][art_postgresql]
 -   David Rozenshtein's *The Essence of SQL* (now sadly out of print)
 
 I would also like to thank the following people
 for spotting issues, making suggestions, or submitting changes:
 
-[% thanks %]
+- Yanina Bellini Saibene
+- Phillip Cloud
+- Zoe Daniels
+- Conor Flynn
+- Andy Goldberg
+- Jay Graves
+- Sam Hames
+- Adam Hawkes
+- Robert Kern
+- Konstantinos Kitsios
+- Olivier Leroy
+- Kevin Marshall
+- Roy Pardee
+- Manos Pitsidianakis
+- Daniel Possenriede 
+- Adam Rosien
+- Thomas Sandmann
+- Simon Willison
+
+[albrecht_andi]: http://andialbrecht.de/
+[art_postgresql]: https://theartofpostgresql.com/
+[carpentries_shell]: https://swcarpentry.github.io/shell-novice/
+[fontaine_dimitri]: https://tapoueh.org/
+[mongodb]: https://www.mongodb.com/
+[palmer_penguins]: https://allisonhorst.github.io/palmerpenguins/
+[persona]: http://teachtogether.tech/en/index.html#s:process-personas
+[postgresql]: https://www.postgresql.org/
+[sql]: https://en.wikipedia.org/wiki/SQL
+[sqlite]: https://sqlite.org/
+[sqlparse]: https://pypi.org/project/sqlparse/
+[t3]: https://teachtogether.tech/

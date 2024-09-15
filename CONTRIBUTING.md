@@ -6,13 +6,8 @@ All contributors will be acknowledged.
 
 ## In Brief
 
--   Use `pip install -r requirements.txt`
+-   Use `uv venv` and `uv pip install -r pyproject.toml`
     to install the packages required by the helper tools and Python examples.
-    You may wish to create a new virtual environment before doing so.
-    All code has been tested with Python 3.12.1.
-
--   The tutorial lives in `src/*/index.md`,
-    which is translated into a static GitHub Pages website using [Ark][ark].
 
 -   The source files for examples are in their section directories
     along with captured output in `.out` files.
@@ -20,60 +15,15 @@ All contributors will be acknowledged.
 -   `Makefile` contains the commands used to re-run each example.
     If you add a new example,
     please add a corresponding rule in `Makefile`.
-    -   `make depend.mk` rebuilds the list of extra dependencies.
-        Please do not update `depend.mk` by hand.
 
 -   Use a level-2 heading for each sub-topic.
     Use `{: .aside}` for an aside
     or `{: .exercise}` for exercise.
 
--   Use `[%inc "file.ext" %]` to include a text file.
-    If `mark=label` is present,
-    only code between comments `[label]` and `[/label]` is kept.
-
--   Use `[% figure slug="some_slug" img="filename.ext" caption="text" alt="text" %]`
-    to include a figure.
-
--   Use `[% g key "text" %]` to link to glossary entries.
-    The text is inserted and highlighted;
-    the key must identify an entry in `info/glossary.yml`,
-    which is in [Glosario][glosario] format.
-
 -   Please create SVG diagrams using [draw.io][draw_io].
     Please use 14-point Helvetica for text,
     solid 1-point black lines,
     and unfilled objects.
-
--   All external links are written using `[box][notation]` inline
-    and defined in `info/links.yml`.
-
-## Logical Structure
-
--   Introduction
-    -   A *learner persona* that characterizes the intended audience in concrete terms.
-    -   *Prerequisites* (which should be interpreted with reference to the learner persona).
-    -   *Learning objectives* that define the tutorial's scope.
-    -   *Setup instructions* that instructors and learners must go through in order to code along
-
--   *Topics* are numbered.
-    Each contains one code sample, its output, and notes for the instructor.
-    Learners are *not* expected to be able to understand topics without instructor elaboration.
-
--   *Asides* are not numbered,
-    and contain code-less explanatory material,
-    additional setup instructions,
-    *concept maps* summarizing recently-introduced ideas,
-    etc.
-
--   *Exercises* are numbered.
-    An exercise section may include any number of exercises.
-
--   Topics of both kinds may contain *glossary references*
-    and/or *explanatory diagrams*.
-
--   Appendices
-    -   A *glossary* that defines terms called out in the topics.
-    -   *Acknowledgments* that point at inspirations and thank contributors.
 
 ## Labels
 
@@ -152,10 +102,6 @@ Why make this tutorial freely available?
 
 ## Colophon
 
--   The tutorial text uses [Atkinson Hyperlegible][atkinson],
-    which was designed to be easy for people with impaired vision to read.
-    Code uses Source Code Pro and diagrams use Helvetica.
-
 -   The colors in this theme
     are lightened versions of those used in [classic Canadian postage stamps][stamps].
     The art in the title is by [Danielle Navarro][navarro_danielle]
@@ -168,9 +114,6 @@ Why make this tutorial freely available?
 
 -   The site is hosted on [GitHub Pages][ghp].
 
--   Traffic statistics are collected using [Plausible][plausible],
-    which provides a lightweight ethical alternative to surveillance capitalism.
-
 -   Thanks to the authors of [BeautifulSoup][bs4],
     [html5validator][html5validator],
     [ruff][ruff],
@@ -179,20 +122,25 @@ Why make this tutorial freely available?
     we all get a lot.
 
 
+[bs4]: https://pypi.org/project/beautifulsoup4/
 [conventional]: https://www.conventionalcommits.org/
 [corrales_pao]: https://paocorrales.github.io/
 [draw_io]: https://www.drawio.com/
 [ghp]: https://pages.github.com/
-[glosario]: https://glosario.carpentries.org/
+[highlight_css]: https://numist.github.io/highlight-css/
+[html5validator]: https://pypi.org/project/html5validator/
 [graphviz]: https://graphviz.org/
 [jekyll]: https://jekyllrb.com/
 [kitsios_konstantinos]: https://kitsiosk.github.io/
 [mccole]: https://pypi.org/project/mccole/
 [mermaid]: https://mermaid.js.org/
-[palmer_penguins]: https://allisonhorst.github.io/palmerpenguins/
+[navarro_danielle]: https://art.djnavarro.net/
 [pandas]: https://pandas.pydata.org/
 [polars]: https://pola.rs/
 [postgresql]: https://www.postgresql.org/
+[ruff]: https://pypi.org/project/ruff/
+[stamps]: https://third-bit.com/colophon/
 [tidyverse]: https://www.tidyverse.org/
 [udell_jon]: https://blog.jonudell.net/
+[wave]: https://wave.webaim.org/
 [wilson_greg]: https://third-bit.com/

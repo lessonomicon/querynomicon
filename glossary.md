@@ -191,7 +191,7 @@
 <span id="nosql">NoSQL database</span>
 :   Any database that doesn't use the relational model.
 
-<span id=""null"">"null"</span>
+<span id="null">null</span>
 :   A special value representing "not known".
 
 ## O

@@ -6,7 +6,7 @@ import sys
 def main(dbname, csv_file_path):
     """Main driver."""
 
-    conn_string     = f"dbname=postgres"
+    conn_string     = "dbname=postgres"
     conn            = psycopg2.connect(conn_string)
     conn.autocommit = True
     cur             = conn.cursor()
@@ -24,7 +24,7 @@ def main(dbname, csv_file_path):
         cur.close()
         conn.close()
 
-g    # Connect to the new database to create tables and import data
+    # Connect to the new database to create tables and import data
     conn_string     = f"dbname={dbname}"
     conn            = psycopg2.connect(conn_string)
     conn.autocommit = True
@@ -46,7 +46,7 @@ g    # Connect to the new database to create tables and import data
 
         # Import data from CSV into the database
         with open(csv_file_path, 'r') as reader:
-            cur.copy_expert(f"COPY penguins FROM STDIN WITH CSV HEADER DELIMITER ','", reader)
+            cur.copy_expert("COPY penguins FROM STDIN WITH CSV HEADER DELIMITER ','", reader)
     except Exception as e:
         print(f"Error in database setup: {e}")
     finally:

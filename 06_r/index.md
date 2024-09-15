@@ -1,12 +1,24 @@
----
-title: "R"
-tagline: "Using databases from R."
----
+# R
 
 # Loading Libraries
 
-[%inc load_connect.r %]
-[%inc load_connect.out %]
+```{file="load_connect.r"}
+library(dplyr)
+```
+```{file="load_connect.out"}
+## 
+## Attaching package: 'dplyr'
+
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+
+## [1] "little_penguins" "penguins"
+```
 
 -   Use `dplyr` to create queries
 -   Database connections are coordinated by the DBI (DataBase Interface) package
@@ -15,53 +27,165 @@ tagline: "Using databases from R."
 
 -  List tables with `dbListTables`
 
-[%inc list_tables.r %]
-[%inc list_tables.out %]
+```{file="list_tables.r"}
+connection <- DBI::dbConnect(RSQLite::SQLite(), 'data/penguins.db')
+DBI::dbListTables(connection)
+```
+```{file="list_tables.out"}
+## [1] "little_penguins" "penguins"
+```
 
 ## Load Table as Dataframe
 
-[%inc get_table.r %]
-[%inc get_table.out %]
+```{file="get_table.r"}
+penguins <- dplyr::tbl(connection, 'penguins')
+penguins
+```
+```{file="get_table.out"}
+## # Source:   table<`penguins`> [?? x 7]
+## # Database: sqlite 3.45.2 [/Users/tut/data/penguins.db]
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # ℹ more rows
+## # ℹ 1 more variable: sex <chr>
+```
 
 -   Retrieve a table with `tbl` function
     -   It need a connection and the name of the table
 
 ## How Did We Get Here?
 
-[%inc show_query.r %]
-[%inc show_query.out %]
+```{file="show_query.r"}
+penguins |> 
+  dplyr::show_query()
+```
+```{file="show_query.out"}
+## <SQL>
+## SELECT *
+## FROM `penguins`
+```
 
 -   `dplyr` functions generate `SELECT` statements
 -   `show_query()` runs the SQL `EXPLAIN` command to show the SQL query
 
 ## Lazy Evaluation
 
-[%inc filter_lazy.r %]
-[%inc filter_lazy.out %]
+```{file="filter_lazy.r"}
+penguins |> 
+  filter(species == "Adelie")
+```
+```{file="filter_lazy.out"}
+## # Source:   SQL [?? x 7]
+## # Database: sqlite 3.45.2 [/Users/tut/data/penguins.db]
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # ℹ more rows
+## # ℹ 1 more variable: sex <chr>
+```
 
 -   `filter` generates a query using `WHERE <condition>` 
 -   `dbplyr` call are lazy.
 -   The SQL query is only evaluated when it is sent to the database
 -   Running the `dplyr` call only returns a preview of the result
 
-[%inc filter_collect.r %]
-[%inc filter_collect.out %]
+```{file="filter_collect.r"}
+penguins |> 
+  filter(species == "Adelie") |> 
+  collect()
+```
+```{file="filter_collect.out"}
+## # A tibble: 152 × 7
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # ℹ 142 more rows
+## # ℹ 1 more variable: sex <chr>
+```
 
 -   `collect` retrieves the complete result of the query
     -   Note that now the table has 152 rows
 
 ## Selecting Columns
 
-[%inc select.r %]
-[%inc select.out %]
+```{file="select.r"}
+penguins |> 
+  select(species, island, contains('bill'))
+```
+```{file="select.out"}
+## # Source:   SQL [?? x 4]
+## # Database: sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
+##    species island    bill_length_mm bill_depth_mm
+##    <chr>   <chr>              <dbl>         <dbl>
+##  1 Adelie  Torgersen           39.1          18.7
+##  2 Adelie  Torgersen           39.5          17.4
+##  3 Adelie  Torgersen           40.3          18  
+##  4 Adelie  Torgersen           NA            NA  
+##  5 Adelie  Torgersen           36.7          19.3
+##  6 Adelie  Torgersen           39.3          20.6
+##  7 Adelie  Torgersen           38.9          17.8
+##  8 Adelie  Torgersen           39.2          19.6
+##  9 Adelie  Torgersen           34.1          18.1
+## 10 Adelie  Torgersen           42            20.2
+## # ℹ more rows
+```
 
 -   R's `select` modifies the SQL `SELECT` statement
 -   Selection helpers from `dplyr` (like `contains`) work
 
 ## Sorting
 
-[%inc sort.r %]
-[%inc sort.out %]
+```{file="sort.r"}
+penguins |> 
+  select(species, body_mass_g) |> 
+  arrange(body_mass_g)
+```
+```{file="sort.out"}
+## # Source:     SQL [?? x 2]
+## # Database:   sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
+## # Ordered by: body_mass_g
+##    species   body_mass_g
+##    <chr>           <dbl>
+##  1 Adelie             NA
+##  2 Gentoo             NA
+##  3 Chinstrap        2700
+##  4 Adelie           2850
+##  5 Adelie           2850
+##  6 Adelie           2900
+##  7 Adelie           2900
+##  8 Adelie           2900
+##  9 Chinstrap        2900
+## 10 Adelie           2925
+## # ℹ more rows
+```
 
 -   With `arrange` you `ORDER BY` the data
 -   There is a `desc` function
@@ -73,13 +197,55 @@ Only show the species, island, and body mass.
 
 ### Solution
 
-[%inc ex_lightest_penguin.r %]
-[%inc ex_lightest_penguin.out %]
+```{file="ex_lightest_penguin.r"}
+penguins |> 
+  select(species, island, body_mass_g) |> 
+  filter(island == 'Dream') |> 
+  arrange(desc(body_mass_g))
+```
+```{file="ex_lightest_penguin.out"}
+## # Source:     SQL [?? x 3]
+## # Database:   sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
+## # Ordered by: desc(body_mass_g)
+##    species   island body_mass_g
+##    <chr>     <chr>        <dbl>
+##  1 Chinstrap Dream         4800
+##  2 Adelie    Dream         4650
+##  3 Adelie    Dream         4600
+##  4 Chinstrap Dream         4550
+##  5 Chinstrap Dream         4500
+##  6 Adelie    Dream         4475
+##  7 Adelie    Dream         4450
+##  8 Chinstrap Dream         4450
+##  9 Adelie    Dream         4400
+## 10 Chinstrap Dream         4400
+## # ℹ more rows
+```
 
 ## Transforming Columns 
 
-[%inc mutate.r %]
-[%inc mutate.out %]
+```{file="mutate.r"}
+penguins |> 
+  mutate(weight_kg = body_mass_g/1000)
+```
+```{file="mutate.out"}
+## # Source:   SQL [?? x 8]
+## # Database: sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # ℹ more rows
+## # ℹ 2 more variables: sex <chr>, weight_kg <dbl>
+```
 
 -   `mutate` also modifies the `SELECT` statement
     -   Naming the new variable works as the `AS` statement
@@ -88,8 +254,24 @@ Only show the species, island, and body mass.
 
 ## Aggregating 
 
-[%inc aggregate.r %]
-[%inc aggregate.out %]
+```{file="aggregate.r"}
+penguins |> 
+  group_by(species) |> 
+  summarise(avg_body_mas = mean(body_mass_g))
+```
+```{file="aggregate.out"}
+## Warning: Missing values are always removed in SQL aggregation functions.
+## Use `na.rm = TRUE` to silence this warning
+## This warning is displayed once every 8 hours.
+
+## # Source:   SQL [3 x 2]
+## # Database: sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
+##   species   avg_body_mas
+##   <chr>            <dbl>
+## 1 Adelie           3701.
+## 2 Chinstrap        3733.
+## 3 Gentoo           5076.
+```
 
 -   `summarise` and `group_by` work together to generate a `GROUP BY` clause
 -   `dplyr` defaults to SQL to handle missing values unless you use the `na.rm` argument in aggregation functions
@@ -101,7 +283,20 @@ Only show the species, island, and body mass.
 
 ## Creating a Table
 
-[%inc create_table.r %]
+```{file="create_table.r"}
+library(DBI)
+
+another_connection <- dbConnect(RSQLite::SQLite(), ':memory:')
+
+table1 <- tibble(
+  person = c('mik', 'mik', 'mik', 'po', 'po', 'tay'),
+  job = c('calibrate', 'clean', 'complain', 'clean', 'complain', 'complain')
+)
+
+dbWriteTable(another_connection, "work", table1, row.names = FALSE, overwrite = TRUE)
+
+work <- tbl(another_connection, "work")
+```
 
 -   Write, overwrite, or append a data frame to a database table with `dbWriteTable` 
     -   `':memory:'` is a "path" that creates an in-memory database
@@ -114,21 +309,50 @@ Create the table `job` with the values shown in [%t r_job_table %].
 
 ### Solution
 
-[%inc ex_job_table.r %]
+```{file="ex_job_table.r"}
+table2 <- tibble(
+  name = c('calibrate', 'clean'),
+  billable = c(1.5, 0.5)
+)
+
+dbWriteTable(another_connection, "job", table2, row.names = FALSE, overwrite = TRUE)
+
+job <- tbl(another_connection, "job")
+```
 
 ## Negation Done Wrong
 
 -   Who doesn't calibrate?
 
-[%inc negate_wrong.r %]
-[%inc negate_wrong.out %]
+```{file="negate_wrong.r"}
+work |> 
+  filter(job != 'calibrate') |> 
+  distinct(person)
+```
+```{file="negate_wrong.out"}
+## # Source:   SQL [3 x 1]
+## # Database: sqlite 3.45.2 [:memory:]
+##   person
+##   <chr> 
+## 1 mik   
+## 2 po    
+## 3 tay
+```
 
 -   Similar to pure SQL, the result is wrong (Mik does calibrate)
     -   But using subqueries with `dplyr` is not that simple
 
 ## Literal SQL
 
-[%inc literal_sql.r %]
+```{file="literal_sql.r"}
+work |> 
+  filter(!person %in% sql(
+    # subquery
+    "(SELECT DISTINCT person FROM work
+    where job = 'calibrate')"
+  )) |> 
+  distinct(person) 
+```
 
 -   You can use literal SQL inside `sql`
     -   It returns an SQL object
@@ -136,8 +360,22 @@ Create the table `job` with the values shown in [%t r_job_table %].
 
 ## Joining Tables
 
-[%inc join.r %]
-[%inc join.out %]
+```{file="join.r"}
+does_calibrate <- work |> 
+  filter(job == 'calibrate')
+
+work |> 
+  anti_join(does_calibrate, by = join_by(person)) |> 
+  distinct(person) |> 
+  collect() 
+```
+```{file="join.out"}
+## # A tibble: 2 × 1
+##   person
+##   <chr> 
+## 1 po    
+## 2 tay
+```
 
 -   Joining tables with `dplyr` works as it does in SQL
     -   The `by` argument works as the `ON` statement
@@ -150,5 +388,18 @@ Calculate how may hours each person worked by summing all jobs.
 
 ### Solution
 
-[%inc ex_join.r %]
-[%inc ex_join.out %]
+```{file="ex_join.r"}
+work |> 
+  left_join(job, by = join_by(job == name)) |> 
+  group_by(person) |> 
+  summarise(total_hours = sum(billable))
+```
+```{file="ex_join.out"}
+## # Source:   SQL [3 x 2]
+## # Database: sqlite 3.45.2 [:memory:]
+##   person total_hours
+##   <chr>        <dbl>
+## 1 mik            2  
+## 2 po             0.5
+## 3 tay           NA
+```

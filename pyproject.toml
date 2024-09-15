@@ -7,6 +7,7 @@ dependencies = [
     "faker",
     "jupysql",
     "jupyter",
+    "mccole",
     "pandas",
     "polars",
     "pyarrow",

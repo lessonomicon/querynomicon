@@ -1,40 +1,90 @@
----
-title: "Python"
-tagline: "Using databases from Python."
----
+# Python
 
 ## Querying from Python
 
-[%inc basic_python_query.py %]
-[%inc basic_python_query.out %]
+```{file="basic_python_query.py"}
+import sqlite3
+import sys
+
+db_path = sys.argv[1]
+connection = sqlite3.connect(db_path)
+cursor = connection.execute("select count(*) from penguins;")
+rows = cursor.fetchall()
+print(rows)
+```
+```{file="basic_python_query.out"}
+[(344,)]
+```
 
 -   `sqlite3` is part of Python's standard library
 -   Create a connection to a database file
--   Get a [%g cursor "cursor" %] by executing a query
+-   Get a [cursor](g:cursor) by executing a query
     -   More common to create cursor and use that to run queries
 -   Fetch all rows at once as list of tuples
 
 ## Incremental Fetch
 
-[%inc incremental_fetch.py %]
-[%inc incremental_fetch.out %]
+```{file="incremental_fetch.py"}
+import sqlite3
+import sys
+
+db_path = sys.argv[1]
+connection = sqlite3.connect(db_path)
+cursor = connection.cursor()
+cursor = cursor.execute("select species, island from penguins limit 5;")
+while row := cursor.fetchone():
+    print(row)
+```
+```{file="incremental_fetch.out"}
+('Adelie', 'Torgersen')
+('Adelie', 'Torgersen')
+('Adelie', 'Torgersen')
+('Adelie', 'Torgersen')
+('Adelie', 'Torgersen')
+```
 
 -   `cursor.fetchone` returns `None` when no more data
 -   There is also `fetchmany(N)` to fetch (up to) a certain number of rows
 
 ## Insert, Delete, and All That
 
-[%inc insert_delete.py %]
-[%inc insert_delete.out %]
+```{file="insert_delete.py"}
+import sqlite3
+
+connection = sqlite3.connect(":memory:")
+cursor = connection.cursor()
+cursor.execute("create table example(num integer);")
+
+cursor.execute("insert into example values (10), (20);")
+print("after insertion", cursor.execute("select * from example;").fetchall())
+
+cursor.execute("delete from example where num < 15;")
+print("after deletion", cursor.execute("select * from example;").fetchall())
+```
+```{file="insert_delete.out"}
+after insertion [(10,), (20,)]
+after deletion [(20,)]
+```
 
 -   Each `execute` is its own transaction
 
 ## Interpolating Values
 
-[%inc interpolate.py %]
-[%inc interpolate.out %]
+```{file="interpolate.py"}
+import sqlite3
 
--   From [XKCD][xkcd-tables]
+connection = sqlite3.connect(":memory:")
+cursor = connection.cursor()
+cursor.execute("create table example(num integer);")
+
+cursor.executemany("insert into example values (?);", [(10,), (20,)])
+print("after insertion", cursor.execute("select * from example;").fetchall())
+```
+```{file="interpolate.out"}
+after insertion [(10,), (20,)]
+```
+
+-   From [XKCD][xkcd_tables]
 
 [% figure
    slug="python_xkcd"
@@ -50,20 +100,83 @@ and inserts an entry into the penguins database.
 
 ## Script Execution
 
-[%inc script_execution.py %]
-[%inc script_execution.out %]
+```{file="script_execution.py"}
+import sqlite3
+
+SETUP = """\
+drop table if exists example;
+create table example(num integer);
+insert into example values (10), (20);
+"""
+
+connection = sqlite3.connect(":memory:")
+cursor = connection.cursor()
+cursor.executescript(SETUP)
+print("after insertion", cursor.execute("select * from example;").fetchall())
+```
+```{file="script_execution.out"}
+after insertion [(10,), (20,)]
+```
 
 -   But what if something goes wrong?
 
 ## SQLite Exceptions in Python
 
-[%inc exceptions.py %]
-[%inc exceptions.out %]
+```{file="exceptions.py"}
+import sqlite3
+
+SETUP = """\
+create table example(num integer check(num > 0));
+insert into example values (10);
+insert into example values (-1);
+insert into example values (20);
+"""
+
+connection = sqlite3.connect(":memory:")
+cursor = connection.cursor()
+try:
+    cursor.executescript(SETUP)
+except sqlite3.Error as exc:
+    print(f"SQLite exception: {exc}")
+print("after execution", cursor.execute("select * from example;").fetchall())
+```
+```{file="exceptions.out"}
+SQLite exception: CHECK constraint failed: num > 0
+after execution [(10,)]
+```
 
 ## Python in SQLite
 
-[%inc embedded_python.py %]
-[%inc embedded_python.out %]
+```{file="embedded_python.py"}
+import sqlite3
+
+SETUP = """\
+create table example(num integer);
+insert into example values (-10), (10), (20), (30);
+"""
+
+
+def clip(value):
+    if value < 0:
+        return 0
+    if value > 20:
+        return 20
+    return value
+
+
+connection = sqlite3.connect(":memory:")
+connection.create_function("clip", 1, clip)
+cursor = connection.cursor()
+cursor.executescript(SETUP)
+for row in cursor.execute("select num, clip(num) from example;").fetchall():
+    print(row)
+```
+```{file="embedded_python.out"}
+(-10, 0)
+(10, 10)
+(20, 20)
+(30, 20)
+```
 
 -   SQLite calls back into Python to execute the function
 -   Other databases can run Python (and other languages) in the database server process
@@ -71,8 +184,49 @@ and inserts an entry into the penguins database.
 
 ## Handling Dates and Times
 
-[%inc dates_times.py %]
-[%inc dates_times.out %]
+```{file="dates_times.py"}
+from datetime import date
+import sqlite3
+
+
+# Convert date to ISO-formatted string when writing to database
+def _adapt_date_iso(val):
+    return val.isoformat()
+
+
+sqlite3.register_adapter(date, _adapt_date_iso)
+
+
+# Convert ISO-formatted string to date when reading from database
+def _convert_date(val):
+    return date.fromisoformat(val.decode())
+
+
+sqlite3.register_converter("date", _convert_date)
+
+SETUP = """\
+create table events(
+    happened date not null,
+    description text not null
+);
+"""
+
+connection = sqlite3.connect(":memory:", detect_types=sqlite3.PARSE_DECLTYPES)
+cursor = connection.cursor()
+cursor.execute(SETUP)
+
+cursor.executemany(
+    "insert into events values (?, ?);",
+    [(date(2024, 1, 10), "started tutorial"), (date(2024, 1, 29), "finished tutorial")],
+)
+
+for row in cursor.execute("select * from events;").fetchall():
+    print(row)
+```
+```{file="dates_times.out"}
+(datetime.date(2024, 1, 10), 'started tutorial')
+(datetime.date(2024, 1, 29), 'finished tutorial')
+```
 
 -   `sqlite3.PARSE_DECLTYPES` tells `sqlite3` library to use converts based on declared column types
 -   Adapt on the way in, convert on the way out
@@ -84,16 +238,24 @@ as they are being written to the database.
 
 ## SQL in Jupyter Notebooks
 
-[%inc install_jupysql.sh %]
+```{file="install_jupysql.sh"}
+pip install jupysql
+```
 
 -   And then inside the notebook:
 
-[%inc load_ext.text %]
+```{file="load_ext.text"}
+%load_ext sql
+```
 
 -   Loads extension
 
-[%inc jupyter_connect.text %]
-[%inc jupyter_connect.out %]
+```{file="jupyter_connect.text"}
+%sql sqlite:///db/penguins.db
+```
+```{file="jupyter_connect.out"}
+Connecting to 'sqlite:///data/penguins.db'
+```
 
 -   Connects to database
     -   `sqlite://` with two slashes is the protocol
@@ -101,8 +263,15 @@ as they are being written to the database.
 -   Single percent sign `%sql` introduces one-line command
 -   Use double percent sign `%%sql` to indicate that the rest of the cell is SQL
 
-[%inc jupyter_select.text %]
-[%inc jupyter_select.out %]
+```{file="jupyter_select.text"}
+%%sql
+select species, count(*) as num
+from penguins
+group by species;
+```
+```{file="jupyter_select.out"}
+Running query in 'sqlite:///data/penguins.db'
+```
 
 <table>
   <thead>
@@ -129,9 +298,26 @@ as they are being written to the database.
 
 ## Pandas and SQL
 
-[%inc install_pandas.sh %]
-[%inc select_pandas.py %]
-[%inc select_pandas.out %]
+```{file="install_pandas.sh"}
+pip install pandas
+```
+```{file="select_pandas.py"}
+import pandas as pd
+import sqlite3
+import sys
+
+db_path = sys.argv[1]
+connection = sqlite3.connect(db_path)
+query = "select species, count(*) as num from penguins group by species;"
+df = pd.read_sql(query, connection)
+print(df)
+```
+```{file="select_pandas.out"}
+     species  num
+0     Adelie  152
+1  Chinstrap   68
+2     Gentoo  124
+```
 
 -   Be careful about datatype conversion when using [Pandas][pandas]
 
@@ -141,11 +327,33 @@ Write a command-line Python script that uses Pandas to re-create the penguins da
 
 ## Polars and SQL
 
-[%inc install_polars.sh %]
-[%inc select_polars.py %]
-[%inc select_polars.out %]
+```{file="install_polars.sh"}
+pip install polars pyarrow adbc-driver-sqlite
+```
+```{file="select_polars.py"}
+import polars as pl
+import sys
 
--   The [%g uri "Uniform Resource Identifier" %] (URI) specifies the database
+db_path = sys.argv[1]
+uri = "sqlite:///{db_path}"
+query = "select species, count(*) as num from penguins group by species;"
+df = pl.read_database_uri(query, uri, engine="adbc")
+print(df)
+```
+```{file="select_polars.out"}
+shape: (3, 2)
+┌───────────┬─────┐
+│ species   ┆ num │
+│ ---       ┆ --- │
+│ str       ┆ i64 │
+╞═══════════╪═════╡
+│ Adelie    ┆ 152 │
+│ Chinstrap ┆ 68  │
+│ Gentoo    ┆ 124 │
+└───────────┴─────┘
+```
+
+-   The [Uniform Resource Identifier](g:uri) (URI) specifies the database
 -   The query is the query
 -   Use the ADBC engine instead of the default ConnectorX with [Polars][polars]
 
@@ -155,10 +363,32 @@ Write a command-line Python script that uses Polars to re-create the penguins da
 
 ## Object-Relational Mappers
 
-[%inc orm.py %]
-[%inc orm.out %]
+```{file="orm.py"}
+from sqlmodel import Field, Session, SQLModel, create_engine, select
+import sys
 
--   An [%g orm "object-relational mapper" %] (ORM) translates table columns to object properties and vice versa
+
+class Department(SQLModel, table=True):
+    ident: str = Field(default=None, primary_key=True)
+    name: str
+    building: str
+
+
+db_uri = f"sqlite:///{sys.argv[1]}"
+engine = create_engine(db_uri)
+with Session(engine) as session:
+    statement = select(Department)
+    for result in session.exec(statement).all():
+        print(result)
+```
+```{file="orm.out"}
+building='Chesson' name='Genetics' ident='gen'
+building='Fashet Extension' name='Histology' ident='hist'
+building='Chesson' name='Molecular Biology' ident='mb'
+building='TGVH' name='Endocrinology' ident='end'
+```
+
+-   An [object-relational mapper](g:orm) (ORM) translates table columns to object properties and vice versa
 -   [SQLModel][sqlmodel] relies on Python type hints
 
 ## Exercise {: .exericse}
@@ -167,9 +397,39 @@ Write a command-line Python script that uses SQLModel to re-create the penguins 
 
 ## Relations with ORMs
 
-[%inc orm_relation.py mark=keep %]
-[%inc orm_relation.out %]
+```{file="orm_relation.py:keep"}
+class Staff(SQLModel, table=True):
+    ident: str = Field(default=None, primary_key=True)
+    personal: str
+    family: str
+    dept: Optional[str] = Field(default=None, foreign_key="department.ident")
+    age: int
+
+
+db_uri = f"sqlite:///{sys.argv[1]}"
+engine = create_engine(db_uri)
+SQLModel.metadata.create_all(engine)
+with Session(engine) as session:
+    statement = select(Department, Staff).where(Staff.dept == Department.ident)
+    for dept, staff in session.exec(statement):
+        print(f"{dept.name}: {staff.personal} {staff.family}")
+```
+```{file="orm_relation.out"}
+Histology: Divit Dhaliwal
+Molecular Biology: Indrans Sridhar
+Molecular Biology: Pranay Khanna
+Histology: Vedika Rout
+Genetics: Abram Chokshi
+Histology: Romil Kapoor
+Molecular Biology: Ishaan Ramaswamy
+Genetics: Nitya Lal
+```
 
 -   Make foreign keys explicit in class definitions
 -   SQLModel automatically does the join
     -   The two staff with no department aren't included in the result
+
+[pandas]: https://pandas.pydata.org/
+[polars]: https://pola.rs/
+[sqlmodel]: https://sqlmodel.tiangolo.com/
+[xkcd_tables]: https://xkcd.com/327/
