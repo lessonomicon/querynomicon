@@ -102,11 +102,17 @@ dd:last-of-type {
     margin-bottom: 0px;
 }
 
-/* Figure */
+/* Figures */
 figure {
-    text-align: center;
-    border: var(--border-thin) var(--color-border);
-    padding: var(--width-padding);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+figure img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Footer */
@@ -125,6 +131,11 @@ h1 {
 /* Other headings */
 h2, h3, h4, h5, h6 {
     font-style: italic;
+}
+
+/* Navigation */
+nav {
+    background-color: var(--color-background-code);
 }
 
 /* Ordered lists */

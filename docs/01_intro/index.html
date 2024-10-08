@@ -9,6 +9,20 @@
 <link href="../static/page.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<nav>
+<div class="row">
+<div class="col-2 left">
+<a href="../">Home</a>
+</div>
+<div class="col-10 right">
+<a href="../license.html">License</a>
+	  ·
+	  <a href="../bibliography.html">Bibliography</a>
+	  ·
+	  <a href="../glossary.html">Glossary</a>
+</div>
+</div>
+</nav>
 <main>
 <h1>Introduction</h1>
 <h2>What This Is</h2>
@@ -84,10 +98,10 @@
 </ul>
 <figure id="intro_concept_map">
 <img alt="box and arrow concept map of major concepts related to databases" src="intro_concept_map.svg"/>
-<figcaption>Figure 1: Overview of Major Concepts</figcaption>
+<figcaption>Concept Map: Overview Concepts</figcaption>
 </figure>
 <h2 class="aside">Connecting to Database</h2>
-<pre><code class="language-sh" file="connect_penguins.sh">sqlite3 db/penguins.db
+<pre class="language-sh"><code class="language-sh" file="connect_penguins.sh">sqlite3 db/penguins.db
 </code></pre>
 <ul>
 <li>Not actually a query: starts an interactive session with the database in <code>db/penguins.db</code></li>

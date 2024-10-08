@@ -9,10 +9,24 @@
 <link href="../static/page.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<nav>
+<div class="row">
+<div class="col-2 left">
+<a href="../">Home</a>
+</div>
+<div class="col-10 right">
+<a href="../license.html">License</a>
+	  ·
+	  <a href="../bibliography.html">Bibliography</a>
+	  ·
+	  <a href="../glossary.html">Glossary</a>
+</div>
+</div>
+</nav>
 <main>
 <h1>Python</h1>
 <h2>Querying from Python</h2>
-<pre><code class="language-py" file="basic_python_query.py">import sqlite3
+<pre class="language-py"><code class="language-py" file="basic_python_query.py">import sqlite3
 import sys
 
 db_path = sys.argv[1]
@@ -21,7 +35,7 @@ cursor = connection.execute("select count(*) from penguins;")
 rows = cursor.fetchall()
 print(rows)
 </code></pre>
-<pre><code class="language-out" file="basic_python_query.out">[(344,)]
+<pre class="language-out"><code class="language-out" file="basic_python_query.out">[(344,)]
 </code></pre>
 <ul>
 <li><code>sqlite3</code> is part of Python's standard library</li>
@@ -33,7 +47,7 @@ print(rows)
 <li>Fetch all rows at once as list of tuples</li>
 </ul>
 <h2>Incremental Fetch</h2>
-<pre><code class="language-py" file="incremental_fetch.py">import sqlite3
+<pre class="language-py"><code class="language-py" file="incremental_fetch.py">import sqlite3
 import sys
 
 db_path = sys.argv[1]
@@ -43,7 +57,7 @@ cursor = cursor.execute("select species, island from penguins limit 5;")
 while row := cursor.fetchone():
     print(row)
 </code></pre>
-<pre><code class="language-out" file="incremental_fetch.out">('Adelie', 'Torgersen')
+<pre class="language-out"><code class="language-out" file="incremental_fetch.out">('Adelie', 'Torgersen')
 ('Adelie', 'Torgersen')
 ('Adelie', 'Torgersen')
 ('Adelie', 'Torgersen')
@@ -54,7 +68,7 @@ while row := cursor.fetchone():
 <li>There is also <code>fetchmany(N)</code> to fetch (up to) a certain number of rows</li>
 </ul>
 <h2>Insert, Delete, and All That</h2>
-<pre><code class="language-py" file="insert_delete.py">import sqlite3
+<pre class="language-py"><code class="language-py" file="insert_delete.py">import sqlite3
 
 connection = sqlite3.connect(":memory:")
 cursor = connection.cursor()
@@ -66,14 +80,14 @@ print("after insertion", cursor.execute("select * from example;").fetchall())
 cursor.execute("delete from example where num &lt; 15;")
 print("after deletion", cursor.execute("select * from example;").fetchall())
 </code></pre>
-<pre><code class="language-out" file="insert_delete.out">after insertion [(10,), (20,)]
+<pre class="language-out"><code class="language-out" file="insert_delete.out">after insertion [(10,), (20,)]
 after deletion [(20,)]
 </code></pre>
 <ul>
 <li>Each <code>execute</code> is its own transaction</li>
 </ul>
 <h2>Interpolating Values</h2>
-<pre><code class="language-py" file="interpolate.py">import sqlite3
+<pre class="language-py"><code class="language-py" file="interpolate.py">import sqlite3
 
 connection = sqlite3.connect(":memory:")
 cursor = connection.cursor()
@@ -82,20 +96,20 @@ cursor.execute("create table example(num integer);")
 cursor.executemany("insert into example values (?);", [(10,), (20,)])
 print("after insertion", cursor.execute("select * from example;").fetchall())
 </code></pre>
-<pre><code class="language-out" file="interpolate.out">after insertion [(10,), (20,)]
+<pre class="language-out"><code class="language-out" file="interpolate.out">after insertion [(10,), (20,)]
 </code></pre>
 <ul>
 <li>From <a href="https://xkcd.com/327/">XKCD</a></li>
 </ul>
 <figure id="python_xkcd">
 <img alt="XKCD cartoon showing a mother scolding a school for not being more careful about SQL injection attacks" src="xkcd_327_exploits_of_a_mom.png"/>
-<figcaption>Figure 1: XKCD Exploits of a Mom</figcaption>
+<figcaption>XKCD Exploits of a Mom</figcaption>
 </figure>
 <h2 class="exercise">Exercise</h2>
 <p>Write a Python script that takes island, species, sex, and other values as command-line arguments
 and inserts an entry into the penguins database.</p>
 <h2>Script Execution</h2>
-<pre><code class="language-py" file="script_execution.py">import sqlite3
+<pre class="language-py"><code class="language-py" file="script_execution.py">import sqlite3
 
 SETUP = """\
 drop table if exists example;
@@ -108,13 +122,13 @@ cursor = connection.cursor()
 cursor.executescript(SETUP)
 print("after insertion", cursor.execute("select * from example;").fetchall())
 </code></pre>
-<pre><code class="language-out" file="script_execution.out">after insertion [(10,), (20,)]
+<pre class="language-out"><code class="language-out" file="script_execution.out">after insertion [(10,), (20,)]
 </code></pre>
 <ul>
 <li>But what if something goes wrong?</li>
 </ul>
 <h2>SQLite Exceptions in Python</h2>
-<pre><code class="language-py" file="exceptions.py">import sqlite3
+<pre class="language-py"><code class="language-py" file="exceptions.py">import sqlite3
 
 SETUP = """\
 create table example(num integer check(num &gt; 0));
@@ -131,11 +145,11 @@ except sqlite3.Error as exc:
     print(f"SQLite exception: {exc}")
 print("after execution", cursor.execute("select * from example;").fetchall())
 </code></pre>
-<pre><code class="language-out" file="exceptions.out">SQLite exception: CHECK constraint failed: num &gt; 0
+<pre class="language-out"><code class="language-out" file="exceptions.out">SQLite exception: CHECK constraint failed: num &gt; 0
 after execution [(10,)]
 </code></pre>
 <h2>Python in SQLite</h2>
-<pre><code class="language-py" file="embedded_python.py">import sqlite3
+<pre class="language-py"><code class="language-py" file="embedded_python.py">import sqlite3
 
 SETUP = """\
 create table example(num integer);
@@ -158,7 +172,7 @@ cursor.executescript(SETUP)
 for row in cursor.execute("select num, clip(num) from example;").fetchall():
     print(row)
 </code></pre>
-<pre><code class="language-out" file="embedded_python.out">(-10, 0)
+<pre class="language-out"><code class="language-out" file="embedded_python.out">(-10, 0)
 (10, 10)
 (20, 20)
 (30, 20)
@@ -169,7 +183,7 @@ for row in cursor.execute("select num, clip(num) from example;").fetchall():
 <li>Be careful</li>
 </ul>
 <h2>Handling Dates and Times</h2>
-<pre><code class="language-py" file="dates_times.py">from datetime import date
+<pre class="language-py"><code class="language-py" file="dates_times.py">from datetime import date
 import sqlite3
 
 
@@ -207,7 +221,7 @@ cursor.executemany(
 for row in cursor.execute("select * from events;").fetchall():
     print(row)
 </code></pre>
-<pre><code class="language-out" file="dates_times.out">(datetime.date(2024, 1, 10), 'started tutorial')
+<pre class="language-out"><code class="language-out" file="dates_times.out">(datetime.date(2024, 1, 10), 'started tutorial')
 (datetime.date(2024, 1, 29), 'finished tutorial')
 </code></pre>
 <ul>
@@ -218,19 +232,19 @@ for row in cursor.execute("select * from events;").fetchall():
 <p>Write a Python adapter that truncates real values to two decimal places
 as they are being written to the database.</p>
 <h2>SQL in Jupyter Notebooks</h2>
-<pre><code class="language-sh" file="install_jupysql.sh">pip install jupysql
+<pre class="language-sh"><code class="language-sh" file="install_jupysql.sh">pip install jupysql
 </code></pre>
 <ul>
 <li>And then inside the notebook:</li>
 </ul>
-<pre><code class="language-text" file="load_ext.text">%load_ext sql
+<pre class="language-text"><code class="language-text" file="load_ext.text">%load_ext sql
 </code></pre>
 <ul>
 <li>Loads extension</li>
 </ul>
-<pre><code class="language-text" file="jupyter_connect.text">%sql sqlite:///db/penguins.db
+<pre class="language-text"><code class="language-text" file="jupyter_connect.text">%sql sqlite:///db/penguins.db
 </code></pre>
-<pre><code class="language-out" file="jupyter_connect.out">Connecting to 'sqlite:///data/penguins.db'
+<pre class="language-out"><code class="language-out" file="jupyter_connect.out">Connecting to 'sqlite:///data/penguins.db'
 </code></pre>
 <ul>
 <li>Connects to database<ul>
@@ -241,12 +255,12 @@ as they are being written to the database.</p>
 <li>Single percent sign <code>%sql</code> introduces one-line command</li>
 <li>Use double percent sign <code>%%sql</code> to indicate that the rest of the cell is SQL</li>
 </ul>
-<pre><code class="language-text" file="jupyter_select.text">%%sql
+<pre class="language-text"><code class="language-text" file="jupyter_select.text">%%sql
 select species, count(*) as num
 from penguins
 group by species;
 </code></pre>
-<pre><code class="language-out" file="jupyter_select.out">Running query in 'sqlite:///data/penguins.db'
+<pre class="language-out"><code class="language-out" file="jupyter_select.out">Running query in 'sqlite:///data/penguins.db'
 </code></pre>
 <table>
 <thead>
@@ -271,9 +285,9 @@ group by species;
 </tbody>
 </table>
 <h2>Pandas and SQL</h2>
-<pre><code class="language-sh" file="install_pandas.sh">pip install pandas
+<pre class="language-sh"><code class="language-sh" file="install_pandas.sh">pip install pandas
 </code></pre>
-<pre><code class="language-py" file="select_pandas.py">import pandas as pd
+<pre class="language-py"><code class="language-py" file="select_pandas.py">import pandas as pd
 import sqlite3
 import sys
 
@@ -283,7 +297,7 @@ query = "select species, count(*) as num from penguins group by species;"
 df = pd.read_sql(query, connection)
 print(df)
 </code></pre>
-<pre><code class="language-out" file="select_pandas.out">     species  num
+<pre class="language-out"><code class="language-out" file="select_pandas.out">     species  num
 0     Adelie  152
 1  Chinstrap   68
 2     Gentoo  124
@@ -294,9 +308,9 @@ print(df)
 <h2 class="exercise">Exercise</h2>
 <p>Write a command-line Python script that uses Pandas to re-create the penguins database.</p>
 <h2>Polars and SQL</h2>
-<pre><code class="language-sh" file="install_polars.sh">pip install polars pyarrow adbc-driver-sqlite
+<pre class="language-sh"><code class="language-sh" file="install_polars.sh">pip install polars pyarrow adbc-driver-sqlite
 </code></pre>
-<pre><code class="language-py" file="select_polars.py">import polars as pl
+<pre class="language-py"><code class="language-py" file="select_polars.py">import polars as pl
 import sys
 
 db_path = sys.argv[1]
@@ -305,7 +319,7 @@ query = "select species, count(*) as num from penguins group by species;"
 df = pl.read_database_uri(query, uri, engine="adbc")
 print(df)
 </code></pre>
-<pre><code class="language-out" file="select_polars.out">shape: (3, 2)
+<pre class="language-out"><code class="language-out" file="select_polars.out">shape: (3, 2)
 ┌───────────┬─────┐
 │ species   ┆ num │
 │ ---       ┆ --- │
@@ -324,7 +338,7 @@ print(df)
 <h2 class="exercise">Exercise</h2>
 <p>Write a command-line Python script that uses Polars to re-create the penguins database.</p>
 <h2>Object-Relational Mappers</h2>
-<pre><code class="language-py" file="orm.py">from sqlmodel import Field, Session, SQLModel, create_engine, select
+<pre class="language-py"><code class="language-py" file="orm.py">from sqlmodel import Field, Session, SQLModel, create_engine, select
 import sys
 
 
@@ -341,7 +355,7 @@ with Session(engine) as session:
     for result in session.exec(statement).all():
         print(result)
 </code></pre>
-<pre><code class="language-out" file="orm.out">building='Chesson' name='Genetics' ident='gen'
+<pre class="language-out"><code class="language-out" file="orm.out">building='Chesson' name='Genetics' ident='gen'
 building='Fashet Extension' name='Histology' ident='hist'
 building='Chesson' name='Molecular Biology' ident='mb'
 building='TGVH' name='Endocrinology' ident='end'
@@ -353,7 +367,7 @@ building='TGVH' name='Endocrinology' ident='end'
 <h2 class="exericse">Exercise</h2>
 <p>Write a command-line Python script that uses SQLModel to re-create the penguins database.</p>
 <h2>Relations with ORMs</h2>
-<pre><code class="language-py" file="orm_relation.py:keep">class Staff(SQLModel, table=True):
+<pre class="language-py"><code class="language-py" file="orm_relation.py:keep">class Staff(SQLModel, table=True):
     ident: str = Field(default=None, primary_key=True)
     personal: str
     family: str
@@ -369,7 +383,7 @@ with Session(engine) as session:
     for dept, staff in session.exec(statement):
         print(f"{dept.name}: {staff.personal} {staff.family}")
 </code></pre>
-<pre><code class="language-out" file="orm_relation.out">Histology: Divit Dhaliwal
+<pre class="language-out"><code class="language-out" file="orm_relation.out">Histology: Divit Dhaliwal
 Molecular Biology: Indrans Sridhar
 Molecular Biology: Pranay Khanna
 Histology: Vedika Rout

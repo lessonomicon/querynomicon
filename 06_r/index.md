@@ -303,9 +303,12 @@ work <- tbl(another_connection, "work")
 
 ## Exercise {: .exercise}
 
-Create the table `job` with the values shown in [%t r_job_table %].
+Create the table `job` with the values shown in the table below.
 
-[% table slug=r_job_table tbl=job_table.tbl caption="Content of Job Table" %]
+|   name    | billable |
+|-----------|----------|
+| calibrate | 1.5      |
+| clean     | 0.5      |
 
 ### Solution
 
