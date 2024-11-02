@@ -4,7 +4,12 @@ include common.mk
 
 all: commands
 
-HTML_IGNORES = 'Attribute "file"'
+HTML_IGNORES =
+
+## build: convert to HTML
+build:
+	mccole render
+	@touch docs/.nojekyll
 
 ## lint: check code and project
 lint:
@@ -13,19 +18,14 @@ lint:
 	@html5validator --root docs --blacklist templates --ignore ${HTML_IGNORES} \
 	&& echo "HTML checks passed."
 
-## render: convert to HTML
-render:
-	mccole render ${CSS}
-	@touch docs/.nojekyll
-
 ## profile: render with profiling
 profile:
-	mccole profile ${CSS}
+	mccole profile
 	@touch docs/.nojekyll
 
 ## serve: serve generated HTML
 serve:
-	@python -m http.server -d docs $(PORT)
+	@python -m http.server -d docs
 
 ## stats: basic site statistics
 stats:
