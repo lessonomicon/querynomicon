@@ -369,7 +369,7 @@ building='TGVH' name='Endocrinology' ident='end'
 <h2 class="exericse">Exercise</h2>
 <p>Write a command-line Python script that uses SQLModel to re-create the penguins database.</p>
 <h2>Relations with ORMs</h2>
-<pre class="language-py:keep"><code class="language-py:keep" data-file="orm_relation.py:keep">class Staff(SQLModel, table=True):
+<pre class="language-py"><code class="language-py" data-file="orm_relation.py:keep">class Staff(SQLModel, table=True):
     ident: str = Field(default=None, primary_key=True)
     personal: str
     family: str

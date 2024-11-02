@@ -29,7 +29,7 @@
 <ul>
 <li>Who doesn't calibrate?</li>
 </ul>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="negate_incorrectly.memory.sql:keep">select distinct person
+<pre class="language-sql"><code class="language-sql" data-file="negate_incorrectly.memory.sql:keep">select distinct person
 from work
 where job != 'calibrate';
 </code></pre>
@@ -46,7 +46,7 @@ where job != 'calibrate';
 <li>We need a different approach…</li>
 </ul>
 <h2>Set Membership</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="set_membership.sql:keep">select *
+<pre class="language-sql"><code class="language-sql" data-file="set_membership.sql:keep">select *
 from work
 where person not in ('mik', 'tay');
 </code></pre>
@@ -59,7 +59,7 @@ where person not in ('mik', 'tay');
 <li><code>in <em>values</em></code> and <code>not in <em>values</em></code> do exactly what you expect</li>
 </ul>
 <h2>Subqueries</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="subquery_set.sql:keep">select distinct person
+<pre class="language-sql"><code class="language-sql" data-file="subquery_set.sql:keep">select distinct person
 from work
 where person not in (
     select distinct person
@@ -141,7 +141,7 @@ Runtime error near line 12: UNIQUE constraint failed: person.ident (19)
 <li>Downside: manual queries are harder to read (who is person 17?)</li>
 </ul>
 <h2 class="aside">Internal Tables</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="sequence_table.memory.sql:keep">select * from sqlite_sequence;
+<pre class="language-sql"><code class="language-sql" data-file="sequence_table.memory.sql:keep">select * from sqlite_sequence;
 </code></pre>
 <pre class="language-out"><code class="language-out" data-file="sequence_table.memory.out">|  name  | seq |
 |--------|-----|
@@ -159,7 +159,7 @@ In particular,
 are you able to reset the values so that
 the same sequence numbers are generated again?</p>
 <h2>Altering Tables</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="alter_tables.sql:keep">alter table job
+<pre class="language-sql"><code class="language-sql" data-file="alter_tables.sql:keep">alter table job
 add ident integer not null default -1;
 
 update job
@@ -208,7 +208,7 @@ select * from job;
 </li>
 </ul>
 <h2>Creating New Tables from Old</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="insert_select.sql:keep">create table new_work (
+<pre class="language-sql"><code class="language-sql" data-file="insert_select.sql:keep">create table new_work (
     person_id integer not null,
     job_id integer not null,
     foreign key (person_id) references person (ident),
@@ -235,7 +235,7 @@ select * from new_work;
 <li>Each column refers to a record in some other table</li>
 </ul>
 <h2>Removing Tables</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="drop_table.sql:keep">drop table work;
+<pre class="language-sql"><code class="language-sql" data-file="drop_table.sql:keep">drop table work;
 alter table new_work rename to work;
 </code></pre>
 <pre class="language-out"><code class="language-out" data-file="drop_table.out">CREATE TABLE job (

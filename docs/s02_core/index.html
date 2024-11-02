@@ -811,7 +811,7 @@ where person = 'tay';
 </li>
 </ul>
 <h2>Deleting Rows</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="delete_rows.memory.sql:keep">delete from work
+<pre class="language-sql"><code class="language-sql" data-file="delete_rows.memory.sql:keep">delete from work
 where person = 'tae';
 
 select * from work;
@@ -831,7 +831,7 @@ select * from work;
 <p>What happens if you try to delete rows that don't exist
 (e.g., all entries in <code>work</code> that refer to <code>juna</code>)?</p>
 <h2>Backing Up</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="backing_up.memory.sql:keep">create table backup (
+<pre class="language-sql"><code class="language-sql" data-file="backing_up.memory.sql:keep">create table backup (
     person text not null,
     job text not null
 );
@@ -895,7 +895,7 @@ select * from backup;
    caption="Concept Map: Data Definition and Modification"
 %]</p>
 <h2>Combining Information</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="cross_join.memory.sql:keep">select *
+<pre class="language-sql"><code class="language-sql" data-file="cross_join.memory.sql:keep">select *
 from work cross join job;
 </code></pre>
 <pre class="language-out"><code class="language-out" data-file="cross_join.memory.out">| person |    job    |   name    | billable |
@@ -925,7 +925,7 @@ from work cross join job;
 </li>
 </ul>
 <h2>Inner Join</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="inner_join.memory.sql:keep">select *
+<pre class="language-sql"><code class="language-sql" data-file="inner_join.memory.sql:keep">select *
 from work inner join job
     on work.job = job.name;
 </code></pre>
@@ -948,7 +948,7 @@ from work inner join job
 Is the shortened form easier or harder to read
 and more or less likely to cause errors?</p>
 <h2>Aggregating Joined Data</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="aggregate_join.memory.sql:keep">select
+<pre class="language-sql"><code class="language-sql" data-file="aggregate_join.memory.sql:keep">select
     work.person,
     sum(job.billable) as pay
 from work inner join job
@@ -969,7 +969,7 @@ group by work.person;
 </li>
 </ul>
 <h2>Left Join</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="left_join.memory.sql:keep">select *
+<pre class="language-sql"><code class="language-sql" data-file="left_join.memory.sql:keep">select *
 from work left join job
     on work.job = job.name;
 </code></pre>
@@ -987,7 +987,7 @@ from work left join job
 <li>Fills missing values from right table with null</li>
 </ul>
 <h2>Aggregating Left Joins</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="aggregate_left_join.memory.sql:keep">select
+<pre class="language-sql"><code class="language-sql" data-file="aggregate_left_join.memory.sql:keep">select
     work.person,
     sum(job.billable) as pay
 from work left join job
@@ -1004,7 +1004,7 @@ group by work.person;
 <li>That's better, but we'd like to see 0 rather than a blank</li>
 </ul>
 <h2>Coalescing Values</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="coalesce.memory.sql:keep">select
+<pre class="language-sql"><code class="language-sql" data-file="coalesce.memory.sql:keep">select
     work.person,
     coalesce(sum(job.billable), 0.0) as pay
 from work left join job

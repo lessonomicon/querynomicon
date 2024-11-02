@@ -242,7 +242,7 @@ add active integer not null default 1;
 update penguins
 set active = iif(species = 'Adelie', 0, 1);
 </code></pre>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="active_penguins.sql:keep">select
+<pre class="language-sql"><code class="language-sql" data-file="active_penguins.sql:keep">select
     species,
     count(*) as num
 from penguins
@@ -285,7 +285,7 @@ update penguins set sex = null where sex = '';
 created by the CSV import shown above?
 How can you correct the ones that need correcting?</p>
 <h2>Views</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="views.sql:keep">create view if not exists
+<pre class="language-sql"><code class="language-sql" data-file="views.sql:keep">create view if not exists
 active_penguins (
     species,
     island,
@@ -620,7 +620,7 @@ end;
     as <code>old.<em>column</em></code> and <code>new.<em>column</em></code></li>
 </ul>
 <h2>Trigger Not Firing</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="trigger_successful.memory.sql:keep">insert into job values
+<pre class="language-sql"><code class="language-sql" data-file="trigger_successful.memory.sql:keep">insert into job values
 ('gene', 1.5),
 ('august', 0.5),
 ('gene', 1.0);
@@ -637,7 +637,7 @@ end;
 | august | 0.5   |
 </code></pre>
 <h2>Trigger Firing</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="trigger_firing.sql:keep">insert into job values
+<pre class="language-sql"><code class="language-sql" data-file="trigger_firing.sql:keep">insert into job values
 ('gene', 1.0),
 ('august', -1.0);
 </code></pre>
@@ -675,7 +675,7 @@ insert into lineage values
 ('Soledad', 'Lourdes'),
 ('Lourdes', 'Santiago');
 </code></pre>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="represent_graph.memory.sql:keep">select * from lineage;
+<pre class="language-sql"><code class="language-sql" data-file="represent_graph.memory.sql:keep">select * from lineage;
 </code></pre>
 <pre class="language-out"><code class="language-out" data-file="represent_graph.memory.out">|  parent  |  child   |
 |----------|----------|
@@ -696,7 +696,7 @@ insert into lineage values
 <h2 class="exercise">Exercise</h2>
 <p>Write a query that uses a self join to find every person's grandchildren.</p>
 <h2>Recursive Queries</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="recursive_lineage.memory.sql:keep">with recursive descendent as (
+<pre class="language-sql"><code class="language-sql" data-file="recursive_lineage.memory.sql:keep">with recursive descendent as (
     select
         'Clemente' as person,
         0 as generations
@@ -777,7 +777,7 @@ Why or why not?</p>
    caption="Contact Diagram"
 %]</p>
 <h2>Bidirectional Contacts</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="bidirectional.sql:keep">create temporary table bi_contact (
+<pre class="language-sql"><code class="language-sql" data-file="bidirectional.sql:keep">create temporary table bi_contact (
     left text,
     right text
 );
@@ -805,7 +805,7 @@ select
 <li>Duplicate information rather than writing more complicated query</li>
 </ul>
 <h2>Updating Group Identifiers</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="update_group_ids.sql:keep">select
+<pre class="language-sql"><code class="language-sql" data-file="update_group_ids.sql:keep">select
     left.name as left_name,
     left.ident as left_ident,
     right.name as right_name,
@@ -839,7 +839,7 @@ from
 <li>Doesn't keep people with no contacts</li>
 </ul>
 <h2>Recursive Labeling</h2>
-<pre class="language-sql:keep"><code class="language-sql:keep" data-file="recursive_labeling.contacts.sql:keep">with recursive labeled as (
+<pre class="language-sql"><code class="language-sql" data-file="recursive_labeling.contacts.sql:keep">with recursive labeled as (
     select
         person.name as name,
         person.ident as label
