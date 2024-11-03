@@ -356,12 +356,10 @@ or look at [the documentation for SQLite's `format()` function][sqlite_format].
 
 ## Check Understanding {: .aside}
 
-[% figure
-   id="core_select_concept_map">
-   src="core_select_concept_map.svg"
-   alt="box and arrow diagram of concepts related to selection"
-   caption="Concept Map: Selection"
-%]
+<figure id="core_select_concept_map">
+  <img src="core_select_concept_map.svg" alt="box and arrow diagram of concepts related to selection"/>
+  <figcaption>Concept Map: Selection</figcaption>
+</figure>
 
 ## Calculating with Missing Values
 
@@ -539,12 +537,10 @@ where sex is null;
 
 ## Check Understanding {: .aside}
 
-[% figure
-   id="core_missing_concept_map">
-   src="core_missing_concept_map.svg"
-   alt="box and arrow diagram of concepts related to null values in SQL"
-   caption="Concept Map: Missing Values"
-%]
+<figure id="core_missing_concept_map">
+  <img src="core_missing_concept_map.svg" alt="box and arrow diagram of concepts related to null values in SQL"/>
+  <figcaption>Concept Map: Missing Values</figcaption>
+</figure>
 
 ## Aggregating
 
@@ -749,12 +745,10 @@ Is it possible to do this using `where` instead of `filter`?
 
 ## Check Understanding {: .aside}
 
-[% figure
-   id="core_aggregate_concept_map">
-   src="core_aggregate_concept_map.svg"
-   alt="box and arrow diagram of concepts related to aggregation in SQL"
-   caption="Concept Map: Aggregation"
-%]
+<figure id="core_aggregate_concept_map">
+  <img src="core_aggregate_concept_map.svg" alt="box and arrow diagram of concepts related to aggregation in SQL"/>
+  <figcaption>Concept Map: Aggregation</figcaption>
+</figure>
 
 ## Creating In-memory Database {: .aside}
 
@@ -938,12 +932,10 @@ Saving and restoring data in binary format:
 
 ## Check Understanding {: .aside}
 
-[% figure
-   id="core_datamod_concept_map">
-   src="core_datamod_concept_map.svg"
-   alt="box and arrow diagram of concepts relatd to defining and modifying data"
-   caption="Concept Map: Data Definition and Modification"
-%]
+<figure id="core_datamod_concept_map">
+  <img src="core_datamod_concept_map.svg" alt="box and arrow diagram of concepts relatd to defining and modifying data"/>
+  <figcaption>Concept Map: Data Definition and Modification</figcaption>
+</figure>
 
 ## Combining Information
 
@@ -1119,12 +1111,10 @@ using the SQL you have seen so far?
 
 ## Check Understanding {: .aside}
 
-[% figure
-   id="core_join_concept_map">
-   src="core_join_concept_map.svg"
-   alt="box and arrow diagram of concepts related to joining tables"
-   caption="Concept Map: Join"
-%]
+<figure id="core_join_concept_map">
+  <img src="core_join_concept_map.svg" alt="box and arrow diagram of concepts related to joining tables"/>
+  <figcaption>Concept Map: Join</figcaption>
+</figure>
 
 [sqlfluff]: https://sqlfluff.com/
 [sqlite_format]: https://sqlite.org/printf.html

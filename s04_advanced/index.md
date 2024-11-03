@@ -349,12 +349,10 @@ the second shows the total number of log entries for that machine.
 
 ## Check Understanding {: .aside}
 
-[% figure
-   id="advanced_temp_concept_map">
-   src="advanced_temp_concept_map.svg"
-   alt="box and arrow diagram showing different kinds of temporary 'tables' in SQL"
-   caption="Temporary Tables"
-%]
+<figure id="advanced_temp_concept_map">
+  <img src="advanced_temp_concept_map.svg" alt="box and arrow diagram showing different kinds of temporary 'tables' in SQL"/>
+  <figcaption>Temporary Tables</figcaption>
+</figure>
 
 ## Hours Reminder {: .aside}
 
@@ -696,12 +694,10 @@ select * from lineage;
 | Lourdes  | Santiago |
 ```
 
-[% figure
-   id="advanced_recursive_lineage">
-   src="advanced_recursive_lineage.svg"
-   alt="box and arrow diagram showing who is descended from whom in the lineage database"
-   caption="Lineage Diagram"
-%]
+<figure id="advanced_recursive_lineage">
+  <img src="advanced_recursive_lineage.svg" alt="box and arrow diagram showing who is descended from whom in the lineage database"/>
+  <figcaption>Lineage Diagram</figcaption>
+</figure>
 
 ## Exercise {: .exercise}
 
@@ -791,12 +787,10 @@ select * from contact;
 | Daniela Menéndez  | Marco Antonio Barrera |
 ```
 
-[% figure
-   id="advanced_recursive_contacts">
-   src="advanced_recursive_contacts.svg"
-   alt="box and line diagram showing who has had contact with whom"
-   caption="Contact Diagram"
-%]
+<figure id="advanced_recursive_contacts">
+  <img src="advanced_recursive_contacts.svg" alt="box and line diagram showing who has had contact with whom"/>
+  <figcaption>Contact Diagram</figcaption>
+</figure>
 
 ## Bidirectional Contacts
 
@@ -917,12 +911,10 @@ so that you can trace its output?
 
 ## Check Understanding {: .aside}
 
-[% figure
-   id="advanced_cte_concept_map">
-   src="advanced_cte_concept_map.svg"
-   alt="box and arrow diagram showing concepts related to common table expressions in SQL"
-   caption="Concept Map: Common Table Expressions"
-%]
+<figure id="advanced_cte_concept_map">
+  <img src="advanced_cte_concept_map.svg" alt="box and arrow diagram showing concepts related to common table expressions in SQL"/>
+  <figcaption>Concept Map: Common Table Expressions</figcaption>
+</figure>
 
 [fossil]: https://fossil-scm.org/
 [sqlite_json]: https://sqlite.org/json1.html

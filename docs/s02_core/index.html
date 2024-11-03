@@ -366,12 +366,10 @@ limit 3;
 <p>You can use the <code>||</code> operator to concatenate text to solve part 1,
 or look at <a href="https://sqlite.org/printf.html">the documentation for SQLite's <code>format()</code> function</a>.</p>
 <h2 class="aside">Check Understanding</h2>
-<p>[% figure
-   id="core_select_concept_map"&gt;
-   src="core_select_concept_map.svg"
-   alt="box and arrow diagram of concepts related to selection"
-   caption="Concept Map: Selection"
-%]</p>
+<figure id="core_select_concept_map">
+<img alt="box and arrow diagram of concepts related to selection" src="core_select_concept_map.svg"/>
+<figcaption>Concept Map: Selection</figcaption>
+</figure>
 <h2>Calculating with Missing Values</h2>
 <pre class="language-sql"><code class="language-sql" data-file="show_missing_values.penguins.sql">select
     flipper_length_mm / 10.0 as flipper_cm,
@@ -532,12 +530,10 @@ where sex is null;
 </li>
 </ol>
 <h2 class="aside">Check Understanding</h2>
-<p>[% figure
-   id="core_missing_concept_map"&gt;
-   src="core_missing_concept_map.svg"
-   alt="box and arrow diagram of concepts related to null values in SQL"
-   caption="Concept Map: Missing Values"
-%]</p>
+<figure id="core_missing_concept_map">
+<img alt="box and arrow diagram of concepts related to null values in SQL" src="core_missing_concept_map.svg"/>
+<figcaption>Concept Map: Missing Values</figcaption>
+</figure>
 <h2>Aggregating</h2>
 <pre class="language-sql"><code class="language-sql" data-file="simple_sum.penguins.sql">select sum(body_mass_g) as total_mass
 from penguins;
@@ -708,12 +704,10 @@ and light penguins (those under 3500 grams)
 simultaneously.
 Is it possible to do this using <code>where</code> instead of <code>filter</code>?</p>
 <h2 class="aside">Check Understanding</h2>
-<p>[% figure
-   id="core_aggregate_concept_map"&gt;
-   src="core_aggregate_concept_map.svg"
-   alt="box and arrow diagram of concepts related to aggregation in SQL"
-   caption="Concept Map: Aggregation"
-%]</p>
+<figure id="core_aggregate_concept_map">
+<img alt="box and arrow diagram of concepts related to aggregation in SQL" src="core_aggregate_concept_map.svg"/>
+<figcaption>Concept Map: Aggregation</figcaption>
+</figure>
 <h2 class="aside">Creating In-memory Database</h2>
 <pre class="language-sh"><code class="language-sh" data-file="in_memory_db.sh">sqlite3 :memory:
 </code></pre>
@@ -888,12 +882,10 @@ select * from backup;
 </li>
 </ol>
 <h2 class="aside">Check Understanding</h2>
-<p>[% figure
-   id="core_datamod_concept_map"&gt;
-   src="core_datamod_concept_map.svg"
-   alt="box and arrow diagram of concepts relatd to defining and modifying data"
-   caption="Concept Map: Data Definition and Modification"
-%]</p>
+<figure id="core_datamod_concept_map">
+<img alt="box and arrow diagram of concepts relatd to defining and modifying data" src="core_datamod_concept_map.svg"/>
+<figcaption>Concept Map: Data Definition and Modification</figcaption>
+</figure>
 <h2>Combining Information</h2>
 <pre class="language-sql"><code class="language-sql" data-file="cross_join.memory.sql:keep">select *
 from work cross join job;
@@ -1051,12 +1043,10 @@ Your output should show that <code>mik</code> and <code>po</code> each spent 0.5
 Can you find a way to show the name of the job as well
 using the SQL you have seen so far?</p>
 <h2 class="aside">Check Understanding</h2>
-<p>[% figure
-   id="core_join_concept_map"&gt;
-   src="core_join_concept_map.svg"
-   alt="box and arrow diagram of concepts related to joining tables"
-   caption="Concept Map: Join"
-%]</p>
+<figure id="core_join_concept_map">
+<img alt="box and arrow diagram of concepts related to joining tables" src="core_join_concept_map.svg"/>
+<figcaption>Concept Map: Join</figcaption>
+</figure>
 </main>
 <footer>
 <a href="../">The Webonomicon</a>
