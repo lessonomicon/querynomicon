@@ -609,7 +609,7 @@ so that it is true in both cases.
 </figure>
 
 <figure id="assays_er">
-  <img src="assays_er.svg" alt="entity-relationship diagram showing logical structure of assay database"/>
+  <img src="tools_assays_er.svg" alt="entity-relationship diagram showing logical structure of assay database"/>
   <figcaption>Assay ER Diagram</figcaption>
 </figure>
 
