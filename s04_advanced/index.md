@@ -523,7 +523,7 @@ select * from jobs_done;
 insert into jobs_done values
 ('zia', 1)
 on conflict(person) do update set num = num + 1;
-.print '\nafter upsert'
+.print 'after upsert'
 select * from jobs_done;
 ```
 ```{data-file="upsert.out"}
@@ -537,7 +537,7 @@ after failed
 | person | num |
 |--------|-----|
 | zia    | 1   |
-\nafter upsert
+after upsert
 | person | num |
 |--------|-----|
 | zia    | 2   |

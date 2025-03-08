@@ -8,7 +8,7 @@ after failed
 | person | num |
 |--------|-----|
 | zia    | 1   |
-\nafter upsert
+after upsert
 | person | num |
 |--------|-----|
 | zia    | 2   |

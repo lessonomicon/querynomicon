@@ -996,7 +996,7 @@ limit 10;
 <li>Nothing special about the names <code>left</code> and <code>right</code></li>
 </ul>
 </li>
-<li>Get all \( n^2 \) pairs, including person with themself</li>
+<li>Get all n^2 pairs, including person with themself</li>
 </ul>
 <h2>Generating Unique Pairs</h2>
 <pre class="language-sql"><code class="language-sql" data-file="unique_pairs.assays.sql">with person as (
@@ -1027,7 +1027,7 @@ where left_person.ident &lt;= 4 and right_person.ident &lt;= 4;
 <li>Query uses <code>left.ident &lt;= 4 and right.ident &lt;= 4</code> to shorten output</li>
 </ul>
 </li>
-<li>Quick check: \( n(n-1)/2 \) pairs</li>
+<li>Quick check: n(n-1)/2 pairs</li>
 </ul>
 <h2>Filtering Pairs</h2>
 <pre class="language-sql"><code class="language-sql" data-file="filter_pairs.assays.sql">with

@@ -998,7 +998,7 @@ limit 10;
 -   Join a table to itself
     -   Use `as` to create [aliases](g:alias) for copies of tables to distinguish them
     -   Nothing special about the names `left` and `right`
--   Get all \\( n^2 \\) pairs, including person with themself
+-   Get all n^2 pairs, including person with themself
 
 ## Generating Unique Pairs
 
@@ -1030,7 +1030,7 @@ where left_person.ident <= 4 and right_person.ident <= 4;
 
 -   `left.ident < right.ident` ensures distinct pairs without duplicates
     -   Query uses `left.ident <= 4 and right.ident <= 4` to shorten output
--   Quick check: \\( n(n-1)/2 \\) pairs
+-   Quick check: n(n-1)/2 pairs
 
 ## Filtering Pairs
 
