@@ -564,11 +564,9 @@ write a query that adds or modifies people in the `staff` table as shown:
 
 -   First [normal form](g:normal_form) (1NF):
     every field of every record contains one indivisible value.
-
 -   Second normal form (2NF) and third normal form (3NF):
     every value in a record that isn't a key depends solely on the key,
     not on other values.
-
 -   [Denormalization](g:denormalization): explicitly store values that could be calculated on the fly
     -   To simplify queries and/or make processing faster
 

@@ -133,6 +133,11 @@ h2, h3, h4, h5, h6 {
     font-style: italic;
 }
 
+/* Side remarks */
+h2.aside::after {
+    content: "\2606 ";
+}
+
 /* Navigation */
 nav {
     background-color: var(--color-background-code);

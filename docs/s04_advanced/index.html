@@ -560,18 +560,12 @@ write a query that adds or modifies people in the <code>staff</code> table as sh
 </table>
 <h2 class="aside">Normalization</h2>
 <ul>
-<li>
-<p>First <a href="../glossary.html#normal_form">normal form</a> (1NF):
-    every field of every record contains one indivisible value.</p>
-</li>
-<li>
-<p>Second normal form (2NF) and third normal form (3NF):
+<li>First <a href="../glossary.html#normal_form">normal form</a> (1NF):
+    every field of every record contains one indivisible value.</li>
+<li>Second normal form (2NF) and third normal form (3NF):
     every value in a record that isn't a key depends solely on the key,
-    not on other values.</p>
-</li>
-<li>
-<p><a href="../glossary.html#denormalization">Denormalization</a>: explicitly store values that could be calculated on the fly</p>
-<ul>
+    not on other values.</li>
+<li><a href="../glossary.html#denormalization">Denormalization</a>: explicitly store values that could be calculated on the fly<ul>
 <li>To simplify queries and/or make processing faster</li>
 </ul>
 </li>
