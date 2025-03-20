@@ -1,10 +1,10 @@
 # Tutorial data.
 title = "The Querynomicon"
 subtitle = "An Introduction to SQL for the Cautious and Weary"
-repo = "https://github.com/lessonomicon/querynomicon"
-plausible = "lessonomicon.github.io/querynomicon"
+repo = "https://github.com/gvwilson/querynomicon"
+plausible = "gvwilson.github.io/querynomicon"
 site = f"https://{plausible}/"
-release = "https://github.com/lessonomicon/querynomicon/raw/main/querynomicon.zip"
+release = "https://github.com/gvwilson/querynomicon/raw/main/querynomicon.zip"
 author = {
     "name": "Greg Wilson",
     "email": "gvwilson@third-bit.com",

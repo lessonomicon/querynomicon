@@ -81,11 +81,11 @@ Welcome, thrice welcome, to SQL.
 
 </div>
 
-[conduct]: https://lessonomicon.github.io/querynomicon/conduct/
-[contribute]: https://lessonomicon.github.io/querynomicon/contributing/
-[help_wanted]: https://github.com/lessonomicon/querynomicon/issues?q=is%3Aissue+is%3Aopen+label%3Ahelp-wanted
-[license]: https://lessonomicon.github.io/querynomicon/license/
+[conduct]: https://gvwilson.github.io/querynomicon/conduct/
+[contribute]: https://gvwilson.github.io/querynomicon/contributing/
+[help_wanted]: https://github.com/gvwilson/querynomicon/issues?q=is%3Aissue+is%3Aopen+label%3Ahelp-wanted
+[license]: https://gvwilson.github.io/querynomicon/license/
 [pratchett_terry]: https://terrypratchett.com/
-[release]: https://github.com/lessonomicon/querynomicon/raw/main/querynomicon.zip
-[site]: https://lessonomicon.github.io/querynomicon/
+[release]: https://github.com/gvwilson/querynomicon/raw/main/querynomicon.zip
+[site]: https://gvwilson.github.io/querynomicon/
 [t3]: https://teachtogether.tech/
