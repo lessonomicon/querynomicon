@@ -361,6 +361,63 @@ shape: (3, 2)
 
 Write a command-line Python script that uses Polars to re-create the penguins database.
 
+## Query Builders
+
+-   Use [PyPika][pypika] to build queries
+
+```{data-file="builder.py"}
+from pypika import Query, Table
+import sqlite3
+import sys
+
+db_path = sys.argv[1]
+connection = sqlite3.connect(db_path)
+
+department = Table("department")
+query = Query.from_(department).select("ident", "building", "name")
+print("query:", str(query))
+cursor = connection.execute(str(query))
+for result in cursor.fetchall():
+    print(result)
+```
+```{data-file="builder.out"}
+query: SELECT "ident","building","name" FROM "department"
+('gen', 'Chesson', 'Genetics')
+('hist', 'Fashet Extension', 'Histology')
+('mb', 'Chesson', 'Molecular Biology')
+('end', 'TGVH', 'Endocrinology')
+```
+
+-   A [query builder](g:query_builder) creates objects representing the parts of a query
+    -   Translate those objects into a SQL string for a particular dialect
+
+```{data-file="builder_relation.py"}
+department = Table("department")
+staff = Table("staff")
+query = Query\
+    .from_(staff)\
+    .join(department)\
+    .on(staff.dept == department.ident)\
+    .select(staff.personal, staff.family, department.building)
+cursor = connection.execute(str(query))
+for result in cursor.fetchall():
+    print(result)
+```
+```{data-file="builder_relation.out"}
+('Divit', 'Dhaliwal', 'Fashet Extension')
+('Indrans', 'Sridhar', 'Chesson')
+('Pranay', 'Khanna', 'Chesson')
+('Vedika', 'Rout', 'Fashet Extension')
+('Abram', 'Chokshi', 'Chesson')
+('Romil', 'Kapoor', 'Fashet Extension')
+('Ishaan', 'Ramaswamy', 'Chesson')
+('Nitya', 'Lal', 'Chesson')
+```
+
+-   Syntax is similar to that of Pandas and Polars because:
+    -   They are all solving the same basic problem
+    -   They all borrow ideas from each other
+
 ## Object-Relational Mappers
 
 ```{data-file="orm.py"}
@@ -431,5 +488,6 @@ Genetics: Nitya Lal
 
 [pandas]: https://pandas.pydata.org/
 [polars]: https://pola.rs/
+[pypika]: https://pypika.readthedocs.io/
 [sqlmodel]: https://sqlmodel.tiangolo.com/
 [xkcd_tables]: https://xkcd.com/327/

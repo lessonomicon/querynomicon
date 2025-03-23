@@ -120,6 +120,10 @@
   url: "https://pypi.org/project/pybtex/"
   title: "pybtex"
 
+- key: "pypika"
+  url: "https://pypika.readthedocs.io/"
+  title: "PyPika"
+
 # R
 
 - key: "ruff"

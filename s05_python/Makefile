@@ -9,6 +9,12 @@ all: ${OUT}
 basic_python_query.out: basic_python_query.py
 	python $< ${DB}/penguins.db > $@
 
+builder.out: builder.py
+	python $< ${DB}/assays.db > $@
+
+builder_relation.out: builder_relation.py
+	python $< ${DB}/assays.db > $@
+
 incremental_fetch.out: incremental_fetch.py
 	python $< ${DB}/penguins.db > $@
 

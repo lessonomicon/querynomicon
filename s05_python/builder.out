@@ -1,0 +1,5 @@
+query: SELECT "ident","building","name" FROM "department"
+('gen', 'Chesson', 'Genetics')
+('hist', 'Fashet Extension', 'Histology')
+('mb', 'Chesson', 'Molecular Biology')
+('end', 'TGVH', 'Endocrinology')

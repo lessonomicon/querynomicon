@@ -25,7 +25,7 @@
 </nav>
 <main>
 <h1>Python</h1>
-<p id="terms">Terms defined: <a href="../glossary.html#cursor">cursor</a>, <a href="../glossary.html#orm">object-relational mapper (ORM)</a>, <a href="../glossary.html#uri">Uniform Resource Identifier (URI)</a></p>
+<p id="terms">Terms defined: <a href="../glossary.html#cursor">cursor</a>, <a href="../glossary.html#orm">object-relational mapper (ORM)</a>, <a href="../glossary.html#query_builder">query builder</a>, <a href="../glossary.html#uri">Uniform Resource Identifier (URI)</a></p>
 <h2>Querying from Python</h2>
 <pre class="language-py"><code class="language-py" data-file="basic_python_query.py">import sqlite3
 import sys
@@ -338,6 +338,63 @@ print(df)
 </ul>
 <h2 class="exercise">Exercise</h2>
 <p>Write a command-line Python script that uses Polars to re-create the penguins database.</p>
+<h2>Query Builders</h2>
+<ul>
+<li>Use <a href="https://pypika.readthedocs.io/">PyPika</a> to build queries</li>
+</ul>
+<pre class="language-py"><code class="language-py" data-file="builder.py">from pypika import Query, Table
+import sqlite3
+import sys
+
+db_path = sys.argv[1]
+connection = sqlite3.connect(db_path)
+
+department = Table("department")
+query = Query.from_(department).select("ident", "building", "name")
+print("query:", str(query))
+cursor = connection.execute(str(query))
+for result in cursor.fetchall():
+    print(result)
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="builder.out">query: SELECT "ident","building","name" FROM "department"
+('gen', 'Chesson', 'Genetics')
+('hist', 'Fashet Extension', 'Histology')
+('mb', 'Chesson', 'Molecular Biology')
+('end', 'TGVH', 'Endocrinology')
+</code></pre>
+<ul>
+<li>A <a href="../glossary.html#query_builder">query builder</a> creates objects representing the parts of a query<ul>
+<li>Translate those objects into a SQL string for a particular dialect</li>
+</ul>
+</li>
+</ul>
+<pre class="language-py"><code class="language-py" data-file="builder_relation.py">department = Table("department")
+staff = Table("staff")
+query = Query\
+    .from_(staff)\
+    .join(department)\
+    .on(staff.dept == department.ident)\
+    .select(staff.personal, staff.family, department.building)
+cursor = connection.execute(str(query))
+for result in cursor.fetchall():
+    print(result)
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="builder_relation.out">('Divit', 'Dhaliwal', 'Fashet Extension')
+('Indrans', 'Sridhar', 'Chesson')
+('Pranay', 'Khanna', 'Chesson')
+('Vedika', 'Rout', 'Fashet Extension')
+('Abram', 'Chokshi', 'Chesson')
+('Romil', 'Kapoor', 'Fashet Extension')
+('Ishaan', 'Ramaswamy', 'Chesson')
+('Nitya', 'Lal', 'Chesson')
+</code></pre>
+<ul>
+<li>Syntax is similar to that of Pandas and Polars because:<ul>
+<li>They are all solving the same basic problem</li>
+<li>They all borrow ideas from each other</li>
+</ul>
+</li>
+</ul>
 <h2>Object-Relational Mappers</h2>
 <pre class="language-py"><code class="language-py" data-file="orm.py">from sqlmodel import Field, Session, SQLModel, create_engine, select
 import sys

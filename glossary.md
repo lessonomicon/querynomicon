@@ -216,6 +216,10 @@
 <span id="query">query</span>
 :   A command to perform some operation in a database (typically data retrieval).
 
+<span id="query_builder">query builder</span>
+:   A library that constructs objects representing the parts of a query
+    and then translates those objects into a SQL string.
+
 ## R
 
 <span id="recursive_cte">recursive CTE</span>
