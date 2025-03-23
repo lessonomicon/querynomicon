@@ -605,12 +605,12 @@ so that it is true in both cases.
 
 <figure id="tools_assays_tables">
   <img src="tools_assays_tables.svg" alt="table-level diagram of assay database showing primary and foreign key relationships"/>
-  <figcaption>Assay Database Table Diagram</figcaption>
+  <figcaption>Figure 1: Assay Database Table Diagram</figcaption>
 </figure>
 
 <figure id="assays_er">
   <img src="tools_assays_er.svg" alt="entity-relationship diagram showing logical structure of assay database"/>
-  <figcaption>Assay ER Diagram</figcaption>
+  <figcaption>Figure 2: Assay ER Diagram</figcaption>
 </figure>
 
 ```{data-file="assay_staff.assays.sql"}

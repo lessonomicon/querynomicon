@@ -59,7 +59,7 @@
 
 <figure id="intro_concept_map">
   <img src="intro_concept_map.svg" alt="box and arrow concept map of major concepts related to databases"/>
-  <figcaption>Concept Map: Overview Concepts</figcaption>
+  <figcaption>Figure 1: Concepts</figcaption>
 </figure>
 
 ## Connecting to Database {: .aside}

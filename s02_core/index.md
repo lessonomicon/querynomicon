@@ -360,7 +360,7 @@ or look at [the documentation for SQLite's `format()` function][sqlite_format].
 
 <figure id="core_select_concept_map">
   <img src="core_select_concept_map.svg" alt="box and arrow diagram of concepts related to selection"/>
-  <figcaption>Concept Map: Selection</figcaption>
+  <figcaption>Figure 1: Selection Concepts</figcaption>
 </figure>
 
 ## Calculating with Missing Values
@@ -541,7 +541,7 @@ where sex is null;
 
 <figure id="core_missing_concept_map">
   <img src="core_missing_concept_map.svg" alt="box and arrow diagram of concepts related to null values in SQL"/>
-  <figcaption>Concept Map: Missing Values</figcaption>
+  <figcaption>Figure 2: Missing Value Concepts</figcaption>
 </figure>
 
 ## Aggregating
@@ -749,7 +749,7 @@ Is it possible to do this using `where` instead of `filter`?
 
 <figure id="core_aggregate_concept_map">
   <img src="core_aggregate_concept_map.svg" alt="box and arrow diagram of concepts related to aggregation in SQL"/>
-  <figcaption>Concept Map: Aggregation</figcaption>
+  <figcaption>Figure 3: Aggregation Conceps</figcaption>
 </figure>
 
 ## Creating In-memory Database {: .aside}
@@ -936,7 +936,7 @@ Saving and restoring data in binary format:
 
 <figure id="core_datamod_concept_map">
   <img src="core_datamod_concept_map.svg" alt="box and arrow diagram of concepts relatd to defining and modifying data"/>
-  <figcaption>Concept Map: Data Definition and Modification</figcaption>
+  <figcaption>Figure 4: Data Definition and Modification Concepts</figcaption>
 </figure>
 
 ## Combining Information
@@ -1115,7 +1115,7 @@ using the SQL you have seen so far?
 
 <figure id="core_join_concept_map">
   <img src="core_join_concept_map.svg" alt="box and arrow diagram of concepts related to joining tables"/>
-  <figcaption>Concept Map: Join</figcaption>
+  <figcaption>Figure 5: Join Concepts</figcaption>
 </figure>
 
 [sqlfluff]: https://sqlfluff.com/
