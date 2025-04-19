@@ -783,6 +783,10 @@ create table work (
     -   `create if not exists`
     -   upper-case keywords (SQL is case insensitive)
 
+## Following Along {: .aside}
+
+-   Use `work_job.db` from the zip file
+
 ## Inserting Data
 
 ```{data-file="populate_work_job.sql"}
@@ -811,14 +815,6 @@ insert into work values
 | po     | complain  |
 | tay    | complain  |
 ```
-
-## Following Along {: .aside}
-
--   Download the examples
--   Unzip that file
--   To re-create this database:
-    -   `.read create_work_job.sql`
-    -   `.read populate_work_job.sql`
 
 ## Exercise {: .exercise}
 
