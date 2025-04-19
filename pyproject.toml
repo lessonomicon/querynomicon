@@ -18,6 +18,7 @@ dependencies = [
 
 [tool.mccole]
 skips = ["bin", "templates"]
+links = "links.md"
 
 [tool.mccole.renames]
 "CODE_OF_CONDUCT.md" = "code_of_conduct.md"

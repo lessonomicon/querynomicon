@@ -485,9 +485,3 @@ Genetics: Nitya Lal
 -   Make foreign keys explicit in class definitions
 -   SQLModel automatically does the join
     -   The two staff with no department aren't included in the result
-
-[pandas]: https://pandas.pydata.org/
-[polars]: https://pola.rs/
-[pypika]: https://pypika.readthedocs.io/
-[sqlmodel]: https://sqlmodel.tiangolo.com/
-[xkcd_tables]: https://xkcd.com/327/

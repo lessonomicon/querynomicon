@@ -229,7 +229,3 @@ where sex = 'MALE' and island = 'Antarctica';
 ```{data-file="update_penguins_again.out"}
 psql:update_penguins_again.sql:3: ERROR:  permission denied for table penguins
 ```
-
-[kitsios_konstantinos]: https://kitsiosk.github.io/
-[postgresql_macos_app]: https://postgresapp.com/downloads.html
-[postgresql_macos_latest]: https://www.enterprisedb.com/downloads/postgres-postgresql-downloads

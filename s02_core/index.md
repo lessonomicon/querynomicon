@@ -1113,6 +1113,3 @@ using the SQL you have seen so far?
   <img src="core_join_concept_map.svg" alt="box and arrow diagram of concepts related to joining tables"/>
   <figcaption>Figure 5: Join Concepts</figcaption>
 </figure>
-
-[sqlfluff]: https://sqlfluff.com/
-[sqlite_format]: https://sqlite.org/printf.html

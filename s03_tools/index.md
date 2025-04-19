@@ -1332,9 +1332,3 @@ Create a query that:
 3.  finds the difference between each successive distinct weight; and
 
 4.  counts how many times each unique difference appears.
-
-[sqitch]: https://sqitch.org/
-[sqlite_datetime]: https://www.sqlite.org/lang_datefunc.html
-[sqlite_function]: https://www.sqlite.org/lang_corefunc.html
-[sqlite_math]: https://www.sqlite.org/lang_mathfunc.html
-[sqlite_window]: https://sqlite.org/windowfunctions.html

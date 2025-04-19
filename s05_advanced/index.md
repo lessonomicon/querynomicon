@@ -915,6 +915,3 @@ so that you can trace its output?
   <img src="advanced_cte_concept_map.svg" alt="box and arrow diagram showing concepts related to common table expressions in SQL"/>
   <figcaption>Figure 4: Common Table Expression Concepts</figcaption>
 </figure>
-
-[fossil]: https://fossil-scm.org/
-[sqlite_json]: https://sqlite.org/json1.html
